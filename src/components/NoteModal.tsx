@@ -1,25 +1,53 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Dispatch, Fragment, SetStateAction, useState } from 'react'
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Note } from '../types/Note';
 
 type Props = {
+  data? :Note
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
 const NoteModal = (props: Props) => {
-  const { isOpen, setIsOpen } = props
+  const { data, isOpen, setIsOpen } = props
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [color, setColor] = useState<string>('Blue')
   const [rating, setRating] = useState<number>(1)
-
+  
+  useEffect(() => {
+    if (data !== undefined) {
+      setTitle(data.title)
+      setDescription(data.description)
+      setColor(data.color)
+      setRating(data.rating)
+    }
+  }, [data])
+  
   const closeModal = () => {
     setIsOpen(false)
   }
 
+  // POST
   const createNewNote = () => {
     console.log({
+      title: title,
+      description: description,
+      color: color,
+      rating: rating,
+    })
+
+
+    setTitle('')
+    setDescription('')
+    closeModal()
+  }
+
+  // PUT
+  const updateNote = () => {
+    console.log({
+      id: data?.id,
       title: title,
       description: description,
       color: color,
@@ -32,7 +60,7 @@ const NoteModal = (props: Props) => {
   }
 
   const colorOptions = ['Blue', 'Red', 'Yellow', 'Green', 'Gray']
-  const ratingOptions = [1,2,3,4,5]
+  const ratingOptions = [1,2,3,4,5,6,7,8,9,10]
   
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -65,7 +93,7 @@ const NoteModal = (props: Props) => {
                   <XMarkIcon className="h-5 w-5 text-gray-500" />
                 </button>
                 <Dialog.Title as="h3" className="text-lg font-medium text-center">
-                  Create New Note
+                  {data === undefined ? 'Create New' : 'Edit'} Note
                 </Dialog.Title>
                 <div>
                   <label htmlFor="title" className='text-slate-500 text-sm'>Title</label>
@@ -94,9 +122,9 @@ const NoteModal = (props: Props) => {
                   disabled={title === '' || description === '' ? true : false}
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
-                  onClick={createNewNote}
+                  onClick={data === undefined ? createNewNote : updateNote}
                 >
-                  Create
+                  {data === undefined ? 'Create' : 'Update'}
                 </button>
               </Dialog.Panel>
             </Transition.Child>
