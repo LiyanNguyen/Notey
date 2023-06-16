@@ -1,5 +1,4 @@
-import { Board } from './components'
-import { Topbar } from './layouts'
+import { Board, Topbar } from './layouts'
 
 function App() {
 

@@ -1,4 +1,4 @@
-import { NoteCard } from "."
+import { NoteCard } from "../components"
 import { fakeArray } from "../data"
 
 const Board = () => {
