@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Note } from '../types/Note';
+import { colorOptions, ratingOptions } from '../data';
 
 type Props = {
   data? :Note
@@ -59,9 +60,6 @@ const NoteModal = (props: Props) => {
     closeModal()
   }
 
-  const colorOptions = ['blue', 'red', 'yellow', 'green', 'gray']
-  const ratingOptions = [1,2,3,4,5,6,7,8,9,10]
-  
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
