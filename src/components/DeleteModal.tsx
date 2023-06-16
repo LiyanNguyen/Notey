@@ -1,6 +1,7 @@
 import { Transition, Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Dispatch, SetStateAction, Fragment } from 'react'
+import supabase from '../config/supabase'
 
 type Props = {
   id: string
@@ -17,9 +18,9 @@ const DeleteModal = (props: Props) => {
   }
 
   // HTTP DELETE
-  const deleteNote = () => {
+  const deleteNote = async () => {
+    await supabase.from('Note').delete().eq('id', id)
     closeModal()
-    console.log(id)
   }
 
   return (

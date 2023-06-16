@@ -1,7 +1,6 @@
 import { Board, Topbar } from './layouts'
 
-function App() {
-
+const App = () => {  
   return (
     <>
       <Topbar />

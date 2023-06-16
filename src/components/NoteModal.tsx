@@ -3,6 +3,7 @@ import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Note } from '../types/Note';
 import { colorOptions, ratingOptions } from '../data';
+import supabase from '../config/supabase';
 
 type Props = {
   data? :Note
@@ -31,14 +32,13 @@ const NoteModal = (props: Props) => {
   }
 
   // HTTP POST
-  const createNewNote = () => {
-    console.log({
+  const createNewNote = async () => {
+    await supabase.from('Note').insert({
       title: title,
       description: description,
       color: color,
       rating: rating,
     })
-
 
     setTitle('')
     setDescription('')
@@ -46,14 +46,13 @@ const NoteModal = (props: Props) => {
   }
 
   // HTTP PUT
-  const updateNote = () => {
-    console.log({
-      id: data?.id,
+  const updateNote = async () => {
+    await supabase.from('Note').update({
       title: title,
       description: description,
       color: color,
       rating: rating,
-    })
+    }).eq('id', data?.id)
 
     setTitle('')
     setDescription('')
