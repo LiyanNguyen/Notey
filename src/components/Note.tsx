@@ -48,17 +48,17 @@ const Note = (props: Props) => {
     <div className={`bg-white border border-violet-100 shadow-md w-72 max-h-64 overflow-y-auto ${borderColor} border-t-2`}>
       <div className='flex flex-col gap-2 p-4 pt-2'>
         <div className="flex justify-between items-center">
-          <h3 className='font-bold text-lg break-all'>{faker.commerce.product()}</h3>
+          <h3 className='font-medium text-lg break-all'>{faker.commerce.product()}</h3>
           <p className={`w-7 h-7 flex items-center justify-center ${ratingColor} rounded text-white`}>8</p>
         </div>
         <p className='text-slate-500'>{faker.commerce.productDescription()}</p>
         <div className='flex justify-between items-center'>
           <p className='text-slate-400 text-xs'>16-06-2023</p>
           <div className="flex gap-2">
-            <button className=" p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-all">
+            <button className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-all">
               <PencilIcon className="h-4 w-4 text-gray-500" />
             </button>
-            <button className=" p-2 rounded-full bg-slate-100 hover:bg-slate-200">
+            <button className="p-2 rounded-full bg-slate-100 hover:bg-slate-200">
               <TrashIcon className="h-4 w-4 text-gray-500" />
             </button>
           </div>
