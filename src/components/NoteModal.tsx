@@ -3,7 +3,8 @@ import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Note } from '../types/Note';
 import { colorOptions, ratingOptions } from '../data';
-import supabase from '../config/supabase';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { POST_NewNote, PUT_updateNote } from '../api';
 
 type Props = {
   data? :Note
@@ -13,10 +14,12 @@ type Props = {
 
 const NoteModal = (props: Props) => {
   const { data, isOpen, setIsOpen } = props
+  const [noteID, setnNoteID] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [color, setColor] = useState<string>('blue')
   const [rating, setRating] = useState<number>(1)
+  const queryClient = useQueryClient()
   
   useEffect(() => {
     if (data !== undefined) {
@@ -24,40 +27,28 @@ const NoteModal = (props: Props) => {
       setDescription(data.description)
       setColor(data.color)
       setRating(data.rating)
+      setnNoteID(data.id)
     }
   }, [data])
   
-  const closeModal = () => {
-    setIsOpen(false)
-  }
+  // FUNCTIONS
+  const closeModal = () => setIsOpen(false)
+  const refetchNotes = () => queryClient.invalidateQueries({ queryKey: ['Notes'] })
+  const resetModal = () => { setTitle(''); setDescription(''); closeModal(); }
+  const createNewNote = () => mutateNewNote()
+  const updateNote = () => mutateUpdateNote()
 
   // HTTP POST
-  const createNewNote = async () => {
-    await supabase.from('Note').insert({
-      title: title,
-      description: description,
-      color: color,
-      rating: rating,
-    })
-
-    setTitle('')
-    setDescription('')
-    closeModal()
-  }
+  const { mutate: mutateNewNote } = useMutation({
+    mutationFn: () => POST_NewNote(title, description, color, rating),
+    onSuccess: () => { refetchNotes(); resetModal(); },
+  })
 
   // HTTP PUT
-  const updateNote = async () => {
-    await supabase.from('Note').update({
-      title: title,
-      description: description,
-      color: color,
-      rating: rating,
-    }).eq('id', data?.id)
-
-    setTitle('')
-    setDescription('')
-    closeModal()
-  }
+  const { mutate: mutateUpdateNote } = useMutation({
+    mutationFn: () => PUT_updateNote(noteID, title, description, color, rating),
+    onSuccess: () => { refetchNotes(); resetModal(); },
+  })
 
   return (
     <Transition appear show={isOpen} as={Fragment}>

@@ -1,7 +1,8 @@
 import { Transition, Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Dispatch, SetStateAction, Fragment } from 'react'
-import supabase from '../config/supabase'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { DELETE_deleteNote } from '../api'
 
 type Props = {
   id: string
@@ -12,16 +13,18 @@ type Props = {
 
 const DeleteModal = (props: Props) => {
   const { id, title, isOpen, setIsOpen } = props
+  const queryClient = useQueryClient()
 
-  const closeModal = () => {
-    setIsOpen(false)
-  }
+  // FUNCTIONS
+  const closeModal = () => setIsOpen(false)
+  const refetchNotes = () => queryClient.invalidateQueries({ queryKey: ['Notes'] })
+  const deleteNote = () => mutateDeleteNote()
 
   // HTTP DELETE
-  const deleteNote = async () => {
-    await supabase.from('Note').delete().eq('id', id)
-    closeModal()
-  }
+  const { mutate: mutateDeleteNote } = useMutation({
+    mutationFn: () => DELETE_deleteNote(id),
+    onSuccess: () => { refetchNotes(); closeModal(); },
+  })
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
