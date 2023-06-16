@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react"
 import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { faker } from '@faker-js/faker';
+import { Note } from "../types/Note";
 
 type Props = {
-  data: {
-    id: string
-    title: string
-    description: string
-    rating: number
-    color: string
-    createdAt: string
-    updatedAt: string
-  }
+  data: Note
 }
 
-const Note = (props: Props) => {
+const NoteCard = (props: Props) => {
   const { color } = props.data
   const [borderColor, setBorderColor] = useState<string>('')
   const [ratingColor, setRatingColor] = useState<string>('')
@@ -68,4 +61,4 @@ const Note = (props: Props) => {
   )
 }
 
-export default Note
+export default NoteCard

@@ -1,9 +1,9 @@
 import Board from "./Board";
-import NewNoteModal from "./NewNoteModal";
-import Note from "./Note";
+import NoteModal from "./NoteModal";
+import NoteCard from "./NoteCard";
 
 export {
-  NewNoteModal,
+  NoteModal,
   Board,
-  Note
+  NoteCard
 }

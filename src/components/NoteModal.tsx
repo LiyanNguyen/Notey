@@ -7,7 +7,7 @@ type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const NewNoteModal = (props: Props) => {
+const NoteModal = (props: Props) => {
   const { isOpen, setIsOpen } = props
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
@@ -108,5 +108,5 @@ const NewNoteModal = (props: Props) => {
 
 }
 
-export default NewNoteModal
+export default NoteModal
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NewNoteModal } from '../components'
+import { NoteModal } from '../components'
 
 const Topbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -10,7 +10,7 @@ const Topbar = () => {
         <h1 className=' text-white font-medium text-3xl'>Notey</h1>
         <button onClick={() => setIsOpen(true)} className=' border border-slate-400 h-max py-1.5 px-2.5 rounded-md text-white hover:text-violet-950 hover:bg-white transition-all'>Create New Note</button>
       </div>
-      <NewNoteModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <NoteModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   )
 }
