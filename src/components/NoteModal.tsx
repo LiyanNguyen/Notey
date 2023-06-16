@@ -13,7 +13,7 @@ const NoteModal = (props: Props) => {
   const { data, isOpen, setIsOpen } = props
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
-  const [color, setColor] = useState<string>('Blue')
+  const [color, setColor] = useState<string>('blue')
   const [rating, setRating] = useState<number>(1)
   
   useEffect(() => {
@@ -29,7 +29,7 @@ const NoteModal = (props: Props) => {
     setIsOpen(false)
   }
 
-  // POST
+  // HTTP POST
   const createNewNote = () => {
     console.log({
       title: title,
@@ -44,7 +44,7 @@ const NoteModal = (props: Props) => {
     closeModal()
   }
 
-  // PUT
+  // HTTP PUT
   const updateNote = () => {
     console.log({
       id: data?.id,
@@ -59,7 +59,7 @@ const NoteModal = (props: Props) => {
     closeModal()
   }
 
-  const colorOptions = ['Blue', 'Red', 'Yellow', 'Green', 'Gray']
+  const colorOptions = ['blue', 'red', 'yellow', 'green', 'gray']
   const ratingOptions = [1,2,3,4,5,6,7,8,9,10]
   
   return (
@@ -106,8 +106,8 @@ const NoteModal = (props: Props) => {
                 <div className='flex gap-5'>
                   <div className='flex flex-col w-full'>
                     <label htmlFor="color" className='text-slate-500 text-sm'>Color</label>
-                    <select value={color} onChange={(e) => setColor(e.target.value)} name="color" id="color" className='w-full border border-slate-400 rounded-sm-within:outline-2 p-1 rounded-sm focus-within:outline-violet-500'>
-                      {colorOptions.map(item => <option key={item} value={item}>{item}</option>)}
+                    <select value={color} onChange={(e) => setColor(e.target.value)} name="color" id="color" className='w-full border border-slate-400 rounded-sm-within:outline-2 p-1 rounded-sm focus-within:outline-violet-500 capitalize'>
+                      {colorOptions.map(item => <option className='capitalize' key={item} value={item}>{item}</option>)}
                     </select>
                   </div>
                   <div className='flex flex-col w-full'>

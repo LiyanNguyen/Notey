@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react"
 import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { Note } from "../types/Note";
-import { NoteModal } from ".";
+import { DeleteModal, NoteModal } from ".";
 
 type Props = {
   data: Note
 }
 
 const NoteCard = (props: Props) => {
-  const { title, description, rating, color } = props.data
+  const { id, title, description, rating, color } = props.data
   const [borderColor, setBorderColor] = useState<string>('')
   const [ratingColor, setRatingColor] = useState<string>('')
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isDeleting, setIsDeleting] = useState<boolean>(false)
 
   // WE HAVE TO DO THIS CUZ TAILWIND DOES NOT ALLOW DYNAMIC CLASSES LOL
   // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
@@ -53,14 +54,15 @@ const NoteCard = (props: Props) => {
               <button onClick={() => setIsOpen(true)} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-all">
                 <PencilIcon className="h-4 w-4 text-gray-500" />
               </button>
-              <button className="p-2 rounded-full bg-slate-100 hover:bg-slate-200">
+              <button onClick={() => setIsDeleting(true)} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200">
                 <TrashIcon className="h-4 w-4 text-gray-500" />
               </button>
             </div>
           </div>
         </div>
       </div>
-      <NoteModal data={props.data} isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <NoteModal data={props.data} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <DeleteModal id={id} title={title} isOpen={isDeleting} setIsOpen={setIsDeleting}/>
     </>
   )
 }
