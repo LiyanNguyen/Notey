@@ -13,7 +13,7 @@ const Topbar = () => {
           <img src={icon} alt="" className=' object-scale-down w-8' />
           <h1 className=' text-white font-medium text-3xl'>Notey</h1>
         </div>
-        <div>
+        <div className='hidden sm:flex gap-5 items-center'>
           <ColorDropdown/>
           <RatingDropdown/>
         </div>
