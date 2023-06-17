@@ -5,6 +5,7 @@ import { Note } from '../types/Note';
 import { colorOptions, ratingOptions } from '../data';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { POST_NewNote, PUT_updateNote } from '../api';
+import { Spinner } from '.';
 
 type Props = {
   data? :Note
@@ -35,17 +36,17 @@ const NoteModal = (props: Props) => {
   const closeModal = () => setIsOpen(false)
   const refetchNotes = () => queryClient.invalidateQueries({ queryKey: ['Notes'] })
   const resetModal = () => { setTitle(''); setDescription(''); closeModal(); }
-  const createNewNote = () => mutateNewNote()
-  const updateNote = () => mutateUpdateNote()
+  const createNewNote = () => POSTMutate()
+  const updateNote = () => PUTMutate()
 
   // HTTP POST
-  const { mutate: mutateNewNote } = useMutation({
+  const { mutate: POSTMutate, isLoading: POSTLoading } = useMutation({
     mutationFn: () => POST_NewNote(title, description, color, rating),
     onSuccess: () => { refetchNotes(); resetModal(); },
   })
 
   // HTTP PUT
-  const { mutate: mutateUpdateNote } = useMutation({
+  const { mutate: PUTMutate, isLoading: PUTLoading } = useMutation({
     mutationFn: () => PUT_updateNote(noteID, title, description, color, rating),
     onSuccess: () => { refetchNotes(); resetModal(); },
   })
@@ -85,11 +86,11 @@ const NoteModal = (props: Props) => {
                 </Dialog.Title>
                 <div>
                   <label htmlFor="title" className='text-slate-500 text-sm'>Title</label>
-                  <input value={title} onChange={(e) => setTitle(e.target.value)} id='title' type="text" className='w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500' />
+                  <input maxLength={25} value={title} onChange={(e) => setTitle(e.target.value)} id='title' type="text" className='w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500' />
                 </div>
                 <div>
                   <label htmlFor="description" className='text-slate-500 text-sm'>Description</label>
-                  <textarea value={description} onChange={(e) => setDescription(e.target.value)} id='description' rows={4} className='w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none' />
+                  <textarea maxLength={250} value={description} onChange={(e) => setDescription(e.target.value)} id='description' rows={4} className='w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none' />
                 </div>
                 <div className='flex gap-5'>
                   <div className='flex flex-col w-full'>
@@ -112,7 +113,10 @@ const NoteModal = (props: Props) => {
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
                   onClick={data === undefined ? createNewNote : updateNote}
                 >
-                  {data === undefined ? 'Create' : 'Update'}
+                  {POSTLoading || PUTLoading ? 
+                    <Spinner className='h-6 w-6 border-[3px]'/> :
+                    data === undefined ? 'Create' : 'Update'
+                  }
                 </button>
               </Dialog.Panel>
             </Transition.Child>

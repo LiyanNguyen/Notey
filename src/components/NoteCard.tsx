@@ -41,7 +41,7 @@ const NoteCard = (props: Props) => {
       
   return (
     <>
-      <div className={`bg-white border border-violet-100 shadow-md w-72 max-h-64 overflow-y-auto ${borderColor} border-t-2`}>
+      <div className={`bg-white border border-violet-100 shadow-md w-72 ${borderColor} border-t-2`}>
         <div className='flex flex-col gap-2 p-4 pt-2'>
           <div className="flex justify-between items-center">
             <h3 className='font-medium text-lg break-all'>{title}</h3>

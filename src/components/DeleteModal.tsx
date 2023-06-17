@@ -3,6 +3,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Dispatch, SetStateAction, Fragment } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { DELETE_deleteNote } from '../api'
+import { Spinner } from '.'
 
 type Props = {
   id: string
@@ -21,7 +22,7 @@ const DeleteModal = (props: Props) => {
   const deleteNote = () => mutateDeleteNote()
 
   // HTTP DELETE
-  const { mutate: mutateDeleteNote } = useMutation({
+  const { mutate: mutateDeleteNote, isLoading } = useMutation({
     mutationFn: () => DELETE_deleteNote(id),
     onSuccess: () => { refetchNotes(); closeModal(); },
   })
@@ -69,7 +70,7 @@ const DeleteModal = (props: Props) => {
                     type="button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 self-center w-28"
                   >
-                    Delete
+                    {isLoading ? <Spinner className='h-6 w-6 border-[3px]' /> : 'Delete'}
                   </button>
                   <button
                     onClick={closeModal}
