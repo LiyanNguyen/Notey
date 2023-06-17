@@ -1,10 +1,11 @@
 import supabase from "../config/supabase"
 
-export const GET_Notes = async () => {
+export const GET_Notes = async (ascending: boolean, color: string) => {
   const { data, error } = await supabase
     .from('Note')
     .select()
-    .order('createdAt', { ascending: false })
+    .order('rating', { ascending: ascending })
+    .eq(color === 'all' ? '' : 'color', color === 'all' ? '' : color)
   
   return { data, error }
 }

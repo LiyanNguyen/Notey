@@ -1,13 +1,17 @@
 import { useQuery } from "@tanstack/react-query"
 import { EmptyBoard, ErrorBoard, LodingBoard, NoteCard } from "../components"
 import { GET_Notes } from "../api"
-// import { fakeArray } from "../data" // switch to this one when there is something wrong with supabase
+import { useRecoilState } from 'recoil';
+import { ascendingState, colorState } from "../global";
 
-const Board = () => {  
+const Board = () => {
+  const [ascending] = useRecoilState(ascendingState)
+  const [color] = useRecoilState(colorState)
+
   // HTTP GET
   const { isLoading, data, isError } = useQuery({
-    queryKey: ['Notes'],
-    queryFn: GET_Notes,
+    queryKey: ['Notes', ascending, color],
+    queryFn: () => GET_Notes(ascending, color),
     refetchOnWindowFocus: false
   })
 

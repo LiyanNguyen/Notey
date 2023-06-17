@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NoteModal } from '../components'
+import { ColorDropdown, NoteModal, RatingDropdown } from '../components'
 import icon from '../assets/icon.png'
 import { PlusIcon } from "@heroicons/react/24/outline";
 
@@ -12,6 +12,10 @@ const Topbar = () => {
         <div className='flex gap-2 items-center'>
           <img src={icon} alt="" className=' object-scale-down w-8' />
           <h1 className=' text-white font-medium text-3xl'>Notey</h1>
+        </div>
+        <div>
+          <ColorDropdown/>
+          <RatingDropdown/>
         </div>
         <button onClick={() => setIsOpen(true)} className=' border border-slate-400 h-max py-1.5 px-2.5 rounded-md text-white hover:text-violet-950 hover:bg-white transition-all flex items-center'><PlusIcon className="w-4 h-4" />New Note</button>
       </div>
