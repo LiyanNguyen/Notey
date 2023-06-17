@@ -5,5 +5,4 @@ export type Note = {
   rating: number
   color: string
   createdAt: string
-  updatedAt: string
 }

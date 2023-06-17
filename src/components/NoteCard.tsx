@@ -2,17 +2,19 @@ import { useEffect, useState } from "react"
 import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { Note } from "../types/Note";
 import { DeleteModal, NoteModal } from ".";
+import formatDate from "../utils/formatDate";
 
 type Props = {
   data: Note
 }
 
 const NoteCard = (props: Props) => {
-  const { id, title, description, rating, color } = props.data
+  const { id, title, description, rating, color, createdAt } = props.data
   const [borderColor, setBorderColor] = useState<string>('')
   const [ratingColor, setRatingColor] = useState<string>('')
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isDeleting, setIsDeleting] = useState<boolean>(false)
+  const dateDisplay = formatDate(new Date(createdAt))
 
   // WE HAVE TO DO THIS CUZ TAILWIND DOES NOT ALLOW DYNAMIC CLASSES LOL
   // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
@@ -38,7 +40,7 @@ const NoteCard = (props: Props) => {
       setRatingColor(`bg-slate-400`)      
     }
   }, [color])
-      
+
   return (
     <>
       <div className={`bg-white border border-violet-100 shadow-md w-72 ${borderColor} border-t-2`}>
@@ -49,7 +51,7 @@ const NoteCard = (props: Props) => {
           </div>
           <p className='text-slate-500'>{description}</p>
           <div className='flex justify-between items-center'>
-            <p className='text-slate-400 text-xs'>16-06-2023</p>
+            <p className='text-slate-400 text-xs'>{dateDisplay}</p>
             <div className="flex gap-2">
               <button onClick={() => setIsOpen(true)} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-all">
                 <PencilIcon className="h-4 w-4 text-gray-500" />

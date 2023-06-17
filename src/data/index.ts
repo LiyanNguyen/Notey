@@ -13,7 +13,6 @@ export const fakeArray: Note[] = [
     rating: 7,
     color: 'blue',
     createdAt: 'string',
-    updatedAt: 'string',
   },
   {
     id: uuidv4(),
@@ -22,7 +21,6 @@ export const fakeArray: Note[] = [
     rating: 6,
     color: 'red',
     createdAt: 'string',
-    updatedAt: 'string',
   },
   {
     id: uuidv4(),
@@ -31,7 +29,6 @@ export const fakeArray: Note[] = [
     rating: 8,
     color: 'yellow',
     createdAt: 'string',
-    updatedAt: 'string',
   },
   {
     id: uuidv4(),
@@ -40,7 +37,6 @@ export const fakeArray: Note[] = [
     rating: 5,
     color: 'green',
     createdAt: 'string',
-    updatedAt: 'string',
   },
   {
     id: uuidv4(),
@@ -49,6 +45,5 @@ export const fakeArray: Note[] = [
     rating: 4,
     color: 'slate',
     createdAt: 'string',
-    updatedAt: 'string',
   },
 ]
