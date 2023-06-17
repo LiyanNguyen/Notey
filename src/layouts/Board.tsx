@@ -7,7 +7,8 @@ const Board = () => {
   // HTTP GET
   const { isLoading, data, isError } = useQuery({
     queryKey: ['Notes'],
-    queryFn: GET_Notes
+    queryFn: GET_Notes,
+    refetchOnWindowFocus: false
   })
 
   return (
