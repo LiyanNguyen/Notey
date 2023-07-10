@@ -1,7 +1,7 @@
 import Board from "./Board";
-import Topbar from "./Topbar";
+import Navbar from "./Navbar";
 
 export {
   Board,
-  Topbar
+  Navbar
 }

@@ -1,8 +1,8 @@
 import { useRecoilState } from 'recoil'
 import { ascendingState } from '../global'
-import { ChangeEvent, memo } from 'react'
+import { ChangeEvent } from 'react'
 
-const RatingDropdown = memo(() => {
+const RatingDropdown = () => {
   const [, setAscending] = useRecoilState(ascendingState)
 
   const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -15,6 +15,6 @@ const RatingDropdown = memo(() => {
       <option value="ascending">Ascending</option>
     </select>
   )
-})
+}
 
 export default RatingDropdown

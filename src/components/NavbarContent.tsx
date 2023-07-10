@@ -1,11 +1,14 @@
-import { useState } from 'react'
-import { ColorDropdown, NoteModal, RatingDropdown } from '../components'
+import { memo } from 'react'
 import icon from '../assets/icon.png'
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { PlusIcon } from "@heroicons/react/24/outline"
+import { ColorDropdown, RatingDropdown } from '.'
 
-const Topbar = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const openModal = () => setIsOpen(true)
+type Props = {
+  openModal: () => void
+}
+
+const NavbarContent = memo((props: Props) => {
+  const { openModal } = props
 
   return (
     <div className='bg-violet-950 h-20 flex'>
@@ -15,14 +18,13 @@ const Topbar = () => {
           <h1 className=' text-white font-medium text-3xl'>Notey</h1>
         </div>
         <div className='hidden sm:flex gap-5 items-center'>
-          <ColorDropdown/>
-          <RatingDropdown/>
+          <ColorDropdown />
+          <RatingDropdown />
         </div>
         <button onClick={openModal} className=' border border-slate-400 h-max py-1.5 px-2.5 rounded-md text-white hover:text-violet-950 hover:bg-white transition-all flex items-center'><PlusIcon className="w-4 h-4" />New Note</button>
       </div>
-      <NoteModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   )
-}
+})
 
-export default Topbar 
+export default NavbarContent

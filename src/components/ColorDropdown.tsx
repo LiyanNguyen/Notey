@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil'
 import { colorState } from '../global'
 import { colorOptions } from '../data'
-import { ChangeEvent, memo } from 'react'
+import { ChangeEvent } from 'react'
 
-const ColorDropdown = memo(() => {
+const ColorDropdown = () => {
   const [, setColor] = useRecoilState(colorState)
 
   const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -18,6 +18,6 @@ const ColorDropdown = memo(() => {
       )}
     </select>
   )
-})
+}
 
 export default ColorDropdown
