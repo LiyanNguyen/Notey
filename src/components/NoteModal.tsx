@@ -125,7 +125,6 @@ const NoteModal = (props: Props) => {
       </Dialog>
     </Transition>
   )
-
 }
 
 export default NoteModal

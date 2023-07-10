@@ -5,6 +5,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 
 const Topbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const openModal = () => setIsOpen(true)
 
   return (
     <div className='bg-violet-950 h-20 flex'>
@@ -17,7 +18,7 @@ const Topbar = () => {
           <ColorDropdown/>
           <RatingDropdown/>
         </div>
-        <button onClick={() => setIsOpen(true)} className=' border border-slate-400 h-max py-1.5 px-2.5 rounded-md text-white hover:text-violet-950 hover:bg-white transition-all flex items-center'><PlusIcon className="w-4 h-4" />New Note</button>
+        <button onClick={openModal} className=' border border-slate-400 h-max py-1.5 px-2.5 rounded-md text-white hover:text-violet-950 hover:bg-white transition-all flex items-center'><PlusIcon className="w-4 h-4" />New Note</button>
       </div>
       <NoteModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
