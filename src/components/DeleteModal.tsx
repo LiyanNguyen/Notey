@@ -1,6 +1,6 @@
 import { Transition, Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Dispatch, SetStateAction, Fragment } from 'react'
+import { Dispatch, SetStateAction, Fragment, memo } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { DELETE_deleteNote } from '../api'
 import { Spinner } from '.'
@@ -12,7 +12,7 @@ type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const DeleteModal = (props: Props) => {
+const DeleteModal = memo((props: Props) => {
   const { id, title, isOpen, setIsOpen } = props
   const queryClient = useQueryClient()
 
@@ -87,6 +87,6 @@ const DeleteModal = (props: Props) => {
       </Dialog>
     </Transition>
   )
-}
+})
 
 export default DeleteModal

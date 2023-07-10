@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, Fragment, SetStateAction, memo, useRef } from 'react'
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Note } from '../types/Note';
 import { colorOptions, ratingOptions } from '../data';
@@ -13,42 +13,47 @@ type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const NoteModal = (props: Props) => {
-  const { data, isOpen, setIsOpen } = props
-  const [noteID, setnNoteID] = useState<string>('')
-  const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [color, setColor] = useState<string>('blue')
-  const [rating, setRating] = useState<number>(1)
+const NoteModal = memo((props: Props) => {
+  const { data, isOpen, setIsOpen, } = props  
+  const titleInputRef = useRef<HTMLInputElement>(null)  
+  const descriptionInputRef = useRef<HTMLTextAreaElement>(null)
+  const colorDropdownRef = useRef<HTMLSelectElement>(null)
+  const ratingDropdownRef = useRef<HTMLSelectElement>(null)
   const queryClient = useQueryClient()
-  
-  useEffect(() => {
-    if (data !== undefined) {
-      setTitle(data.title)
-      setDescription(data.description)
-      setColor(data.color)
-      setRating(data.rating)
-      setnNoteID(data.id)
-    }
-  }, [data])
   
   // FUNCTIONS
   const closeModal = () => setIsOpen(false)
   const refetchNotes = () => queryClient.invalidateQueries({ queryKey: ['Notes'] })
-  const resetModal = () => { setTitle(''); setDescription(''); closeModal(); }
   const createNewNote = () => POSTMutate()
   const updateNote = () => PUTMutate()
 
   // HTTP POST
   const { mutate: POSTMutate, isLoading: POSTLoading } = useMutation({
-    mutationFn: () => POST_NewNote(title, description, color, rating),
-    onSuccess: () => { refetchNotes(); resetModal(); },
+    mutationFn: async () => {
+      if (titleInputRef.current && descriptionInputRef.current && colorDropdownRef.current && ratingDropdownRef.current)
+        POST_NewNote(
+          titleInputRef.current.value,
+          descriptionInputRef.current.value,
+          colorDropdownRef.current.value,
+          parseInt(ratingDropdownRef.current.value)
+        )
+    },
+    onSuccess: () => { refetchNotes(); closeModal(); },
   })
 
   // HTTP PUT
   const { mutate: PUTMutate, isLoading: PUTLoading } = useMutation({
-    mutationFn: () => PUT_updateNote(noteID, title, description, color, rating),
-    onSuccess: () => { refetchNotes(); resetModal(); },
+    mutationFn: async () => {
+      if (props.data && titleInputRef.current && descriptionInputRef.current && colorDropdownRef.current && ratingDropdownRef.current)
+        PUT_updateNote(
+          props.data.id,
+          titleInputRef.current.value,
+          descriptionInputRef.current.value,
+          colorDropdownRef.current.value,
+          parseInt(ratingDropdownRef.current.value)
+        )
+    },
+    onSuccess: () => { refetchNotes(); closeModal(); },
   })
 
   return (
@@ -86,29 +91,29 @@ const NoteModal = (props: Props) => {
                 </Dialog.Title>
                 <div>
                   <label htmlFor="title" className='text-slate-500 text-sm'>Title</label>
-                  <input maxLength={25} value={title} onChange={(e) => setTitle(e.target.value)} id='title' type="text" className='w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500' />
+                  <input ref={titleInputRef} maxLength={25} defaultValue={data ? data.title : ''} id='title' type="text" className='w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500' />
                 </div>
                 <div>
                   <label htmlFor="description" className='text-slate-500 text-sm'>Description</label>
-                  <textarea maxLength={250} value={description} onChange={(e) => setDescription(e.target.value)} id='description' rows={4} className='w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none' />
+                  <textarea ref={descriptionInputRef} maxLength={250} defaultValue={data ? data.description : ''} id='description' rows={4} className='w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none' />
                 </div>
                 <div className='flex gap-5'>
                   <div className='flex flex-col w-full'>
                     <label htmlFor="color" className='text-slate-500 text-sm'>Color</label>
-                    <select value={color} onChange={(e) => setColor(e.target.value)} name="color" id="color" className='w-full border border-slate-400 rounded-sm-within:outline-2 p-1 rounded-sm focus-within:outline-violet-500 capitalize'>
+                    <select ref={colorDropdownRef} defaultValue={data ? data.color : 'blue'} name="color" id="color" className='w-full border border-slate-400 rounded-sm-within:outline-2 p-1 rounded-sm focus-within:outline-violet-500 capitalize'>
                       {colorOptions.map(item => <option className='capitalize' key={item} value={item}>{item}</option>)}
                     </select>
                   </div>
                   <div className='flex flex-col w-full'>
                     <label htmlFor="rating" className='text-slate-500 text-sm'>Rating</label>
-                    <select value={rating} onChange={(e) => setRating(Number(e.target.value))} name="rating" id="rating" className='w-full border border-slate-400 rounded-sm-within:outline-2 p-1 rounded-sm focus-within:outline-violet-500'>
+                    <select ref={ratingDropdownRef} defaultValue={data ? data.rating : '1'} name="rating" id="rating" className='w-full border border-slate-400 rounded-sm-within:outline-2 p-1 rounded-sm focus-within:outline-violet-500'>
                       {ratingOptions.map(item => <option key={item} value={item}>{item}</option>)}
                     </select>
                   </div>
                 </div>
                 <div className='h-0.5 bg-gray-200 mt-4'/>
                 <button
-                  disabled={title === '' || description === '' ? true : false}
+                  disabled={titleInputRef.current?.value === '' || descriptionInputRef.current?.value === '' ? true : false}
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
                   onClick={data === undefined ? createNewNote : updateNote}
@@ -125,7 +130,7 @@ const NoteModal = (props: Props) => {
       </Dialog>
     </Transition>
   )
-}
+})
 
 export default NoteModal
 
