@@ -24,8 +24,11 @@ const NoteModal = memo((props: Props) => {
   // FUNCTIONS
   const closeModal = () => setIsOpen(false)
   const refetchNotes = () => queryClient.invalidateQueries({ queryKey: ['Notes'] })
-  const createNewNote = () => POSTMutate()
-  const updateNote = () => PUTMutate()
+  const createOrUpdateNote = () => {
+    titleInputRef.current?.value === '' || descriptionInputRef.current?.value === '' ?
+      alert('title and description cannot be empty!') : data === undefined ?
+        POSTMutate() : PUTMutate()
+  }
 
   // HTTP POST
   const { mutate: POSTMutate, isLoading: POSTLoading } = useMutation({
@@ -116,7 +119,7 @@ const NoteModal = memo((props: Props) => {
                   disabled={titleInputRef.current?.value === '' || descriptionInputRef.current?.value === '' ? true : false}
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
-                  onClick={data === undefined ? createNewNote : updateNote}
+                  onClick={createOrUpdateNote}
                 >
                   {POSTLoading || PUTLoading ? 
                     <Spinner className='h-6 w-6 border-[3px]'/> :

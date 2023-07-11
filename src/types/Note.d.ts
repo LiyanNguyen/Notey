@@ -3,6 +3,6 @@ export type Note = {
   title: string
   description: string
   rating: number
-  color: string
+  color: 'blue' | 'red' | 'yellow' | 'green' | 'slate'
   createdAt: string
 }
