@@ -14,7 +14,7 @@ const ColorDropdown = () => {
     <select role='combobox' className='w-32 border border-slate-400 rounded-sm-within:outline-2 p-0.5 rounded-sm focus-within:outline-violet-500 capitalize' onChange={handleOnChange} defaultValue='all'>
       <option role='option' value="all" className='capitalize'>all</option>
       {colorOptions.map(item =>
-        <option key={item} value={item} className='capitalize'>{item}</option>
+        <option role='option' key={item} value={item} className='capitalize'>{item}</option>
       )}
     </select>
   )
