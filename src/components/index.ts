@@ -4,7 +4,7 @@ import DeleteModal from "./DeleteModal";
 import Spinner from "./Spinner";
 import EmptyBoard from "./EmptyBoard";
 import ErrorBoard from "./ErrorBoard";
-import LodingBoard from "./LodingBoard";
+import LoadingBoard from "./LoadingBoard";
 import RatingDropdown from "./RatingDropdown";
 import ColorDropdown from "./ColorDropdown";
 
@@ -15,7 +15,7 @@ export {
   Spinner,
   EmptyBoard,
   ErrorBoard,
-  LodingBoard,
+  LoadingBoard,
   RatingDropdown,
   ColorDropdown
 }

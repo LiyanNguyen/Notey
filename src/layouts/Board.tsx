@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { EmptyBoard, ErrorBoard, LodingBoard, NoteCard } from "../components"
+import { EmptyBoard, ErrorBoard, LoadingBoard, NoteCard } from "../components"
 import { GET_Notes } from "../api"
 import { useRecoilState } from 'recoil';
 import { ascendingState, colorState } from "../global";
@@ -19,7 +19,7 @@ const Board = () => {
     <div className="bg-violet-50">
       <div className="mx-auto container h-[calc(100vh-80px)] overflow-auto">
         <div className='px-3 sm:px-10 py-3 sm:py-5 flex flex-wrap justify-center sm:justify-normal items-start gap-5'>
-          {isLoading && <LodingBoard />}
+          {isLoading && <LoadingBoard />}
           {data?.error || isError ?  <ErrorBoard /> : null}
           {data?.data?.length === 0 && <EmptyBoard />}
           {data?.data?.map((item, index) => <NoteCard key={index} data={item} />)}
