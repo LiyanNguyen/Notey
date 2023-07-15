@@ -5,31 +5,38 @@ import NoteCardContent from '../components/NoteCardContent'
 
 describe('NoteCardContent', () => {
   it('renders correctly with props and styling', () => {
+    const borderColor = 'border-t-blue-400'
+    const ratingColor = 'bg-blue-400'
+    const title = 'Sample Title'
+    const description = 'Sample Description'
+    const dateDisplay = '11-07-2023'
+    const rating = 8
+
     render(
       <NoteCardContent
-        borderColor='border-t-blue-400'
-        ratingColor='bg-blue-400'
-        title='Sample Title'
-        description='Sample Description'
-        dateDisplay='11-07-2023'
-        rating={8}
+        borderColor={borderColor}
+        ratingColor={ratingColor}
+        title={title}
+        description={description}
+        dateDisplay={dateDisplay}
+        rating={rating}
         openEditModal={() => null}
         openDeleteModal={() => null}
       />
     )
     
-    const containerDiv = screen.getByTestId('container')
+    const containerDiv = screen.getByRole('group')
     const titleText = screen.getByRole('heading')
-    const descriptionText = screen.getByTestId('description')
-    const dateText = screen.getByTestId('date')
-    const ratingText = screen.getByTestId('rating')
+    const descriptionText = screen.getByRole('contentinfo')
+    const dateText = screen.getByRole('time')
+    const ratingBox = screen.getByRole('note')
     
-    expect(containerDiv).toHaveClass('border-t-blue-400')
-    expect(titleText).toHaveTextContent('Sample Title')
-    expect(descriptionText).toHaveTextContent('Sample Description')
-    expect(dateText).toHaveTextContent('11-07-2023')
-    expect(ratingText).toHaveTextContent('8')
-    expect(ratingText).toHaveClass('bg-blue-400')
+    expect(containerDiv).toHaveClass(borderColor)
+    expect(titleText).toHaveTextContent(title)
+    expect(descriptionText).toHaveTextContent(description)
+    expect(dateText).toHaveTextContent(dateDisplay)
+    expect(ratingBox).toHaveTextContent(String(rating))
+    expect(ratingBox).toHaveClass(ratingColor)
   })
 
   it('opens modal when the pencil icon is clicked', async () => {
@@ -47,7 +54,7 @@ describe('NoteCardContent', () => {
       />
     )
 
-    const editNoteButton = screen.getByTestId('edit-note')
+    const editNoteButton = screen.getByRole('button', { name: 'Edit' })
     await user.click(editNoteButton)
     
     expect(editNoteButton).toBeInTheDocument()
@@ -69,7 +76,7 @@ describe('NoteCardContent', () => {
       />
     )
 
-    const deleteNoteButton = screen.getByTestId('delete-note')
+    const deleteNoteButton = screen.getByRole('button', { name: 'Delete' })
     await user.click(deleteNoteButton)
 
     expect(deleteNoteButton).toBeInTheDocument()

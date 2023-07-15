@@ -25,20 +25,22 @@ const NoteCardContent = memo((props: Props) => {
   } = props
 
   return (
-    <div data-testid='container' className={`bg-white border border-violet-100 shadow-md w-72 ${borderColor} border-t-2`}>
+    <div role='group' className={`bg-white border border-violet-100 shadow-md w-72 ${borderColor} border-t-2`}>
       <div className='flex flex-col gap-2 p-4 pt-2'>
         <div className="flex justify-between items-center">
-          <h3 className='font-medium text-lg break-all'>{title}</h3>
-          <p data-testid='rating' className={`w-7 h-7 flex items-center justify-center ${ratingColor} rounded text-white`}>{rating}</p>
+          <h3 role='heading' className='font-medium text-lg break-all'>{title}</h3>
+          <p role='note' className={`w-7 h-7 flex items-center justify-center ${ratingColor} rounded text-white`}>{rating}</p>
         </div>
-        <p data-testid='description' className='text-slate-500'>{description}</p>
+        <p role='contentinfo' className='text-slate-500'>{description}</p>
         <div className='flex justify-between items-center'>
-          <p data-testid='date' className='text-slate-400 text-xs'>{dateDisplay}</p>
+          <p role='time' className='text-slate-400 text-xs'>{dateDisplay}</p>
           <div className="flex gap-2">
-            <button data-testid='edit-note' onClick={openEditModal} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-all">
+            <button role='button' onClick={openEditModal} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-all">
+              <span className='hidden'>Edit</span>
               <PencilIcon className="h-4 w-4 text-gray-500" />
             </button>
-            <button data-testid='delete-note' onClick={openDeleteModal} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200">
+            <button role='button' onClick={openDeleteModal} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200">
+              <span className='hidden'>Delete</span>
               <TrashIcon className="h-4 w-4 text-gray-500" />
             </button>
           </div>
