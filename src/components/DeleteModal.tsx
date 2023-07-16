@@ -55,6 +55,7 @@ const DeleteModal = memo((props: Props) => {
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3">
                 <button onClick={closeModal} className='absolute right-3 top-3 p-1.5 rounded-full bg-slate-50 hover:bg-slate-200 transition-all'>
+                  <span className='hidden'>Close</span>
                   <XMarkIcon className="h-5 w-5 text-gray-500" />
                 </button>
                 <Dialog.Title as="h3" className="text-lg font-medium text-center">

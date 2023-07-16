@@ -78,11 +78,10 @@ describe('NoteModal', () => {
     )
 
     const XButton = await screen.findByRole('button', { name: 'Close' })
-    expect(XButton).toBeInTheDocument()
-
+    
     await userEvent.click(XButton)
+    
+    expect(XButton).toBeInTheDocument()
     expect(setIsOpen).toHaveBeenCalledTimes(1)
   })
-
-
 })
