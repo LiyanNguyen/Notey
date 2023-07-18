@@ -7,6 +7,7 @@ import ErrorBoard from "./ErrorBoard";
 import LoadingBoard from "./LoadingBoard";
 import RatingDropdown from "./RatingDropdown";
 import ColorDropdown from "./ColorDropdown";
+import NavbarContent from "./NavbarContent";
 
 export {
   NoteModal,
@@ -17,5 +18,6 @@ export {
   ErrorBoard,
   LoadingBoard,
   RatingDropdown,
-  ColorDropdown
+  ColorDropdown,
+  NavbarContent
 }

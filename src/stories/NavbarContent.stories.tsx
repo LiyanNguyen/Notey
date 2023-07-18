@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { ColorDropdown } from '../components'
-import { RecoilRoot } from 'recoil';
+import { NavbarContent } from '../components'
+import { RecoilRoot } from 'recoil'
 
 const meta = {
-  title: 'Components/ColorDropdown',
-  component: ColorDropdown,
+  title: 'Components/NavbarContent',
+  component: NavbarContent,
   decorators: [
     (Story) => (
       <RecoilRoot>
@@ -14,11 +14,11 @@ const meta = {
   ],
   // tags: ['autodocs'],
 
-} satisfies Meta<typeof ColorDropdown>
+} satisfies Meta<typeof NavbarContent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  
+
 }

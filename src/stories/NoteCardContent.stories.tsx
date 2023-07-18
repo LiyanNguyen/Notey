@@ -21,7 +21,6 @@ const meta = {
   title: 'Components/NoteCardContent',
   component: NoteCardContent,
   // tags: ['autodocs'],
-
   argTypes: {
     borderColor: { control: 'inline-radio', options: borderColorOptions },
     ratingColor: { control: 'inline-radio', options: ratingColorOptions },
@@ -84,8 +83,6 @@ export const Green: Story = {
     openDeleteModal: () => null,
   }
 }
-
-
 
 export const Slate: Story = {
   args: {
