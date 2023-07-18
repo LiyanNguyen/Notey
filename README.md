@@ -11,6 +11,8 @@ You can create notes, assign colors and ratings to it, edit, delete, update, sor
 - Recoil
 - Tanstack Query
 - Supabase
+- Vitest (JEST + React Testing Library)
+- Storybook
 
 ### Preview
 ![image](https://github.com/LiyanNguyen/Notey/assets/50958126/bab5bdc2-6b7d-4f9f-a8de-6c5977382660)
