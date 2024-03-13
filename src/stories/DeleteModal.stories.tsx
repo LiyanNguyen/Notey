@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { DeleteModal } from '../components'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { RecoilRoot } from 'recoil'
 
 const queryClient = new QueryClient()
 
@@ -10,7 +11,9 @@ const meta = {
   decorators: [
     (Story) => (
       <QueryClientProvider client={queryClient} >
-        <Story />
+        <RecoilRoot>
+          <Story />
+        </RecoilRoot>
       </QueryClientProvider>
     ),
   ],
