@@ -17,29 +17,17 @@ const NoteCard = (props: Props) => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false)
   const dateDisplay = formatDate(new Date(createdAt))
 
-  // WE HAVE TO DO THIS CUZ TAILWIND DOES NOT ALLOW DYNAMIC CLASSES LOL
   // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
   useEffect(() => {
-    if (color === 'blue') {
-      setBorderColor(`border-t-blue-400`)
-      setRatingColor(`bg-blue-400`)      
+    const colorClasses = {
+      blue: { borderColor: 'border-t-blue-400', ratingColor: 'bg-blue-400' },
+      red: { borderColor: 'border-t-red-400', ratingColor: 'bg-red-400' },
+      yellow: { borderColor: 'border-t-yellow-400', ratingColor: 'bg-yellow-400' },
+      green: { borderColor: 'border-t-green-400', ratingColor: 'bg-green-400' },
+      slate: { borderColor: 'border-t-slate-400', ratingColor: 'bg-slate-400' },
     }
-    else if (color === 'red') {
-      setBorderColor(`border-t-red-400`)
-      setRatingColor(`bg-red-400`)      
-    }
-    else if (color === 'yellow') {
-      setBorderColor(`border-t-yellow-400`)
-      setRatingColor(`bg-yellow-400`)      
-    }
-    else if (color === 'green') {
-      setBorderColor(`border-t-green-400`)
-      setRatingColor(`bg-green-400`)      
-    }
-    else if (color === 'slate') {
-      setBorderColor(`border-t-slate-400`)
-      setRatingColor(`bg-slate-400`)      
-    }
+    setBorderColor(colorClasses[color].borderColor)
+    setRatingColor(colorClasses[color].ratingColor)
   }, [color])
 
   const openEditModal = useCallback(() => setIsEditing(true), [])
