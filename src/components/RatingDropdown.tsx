@@ -11,8 +11,8 @@ const RatingDropdown = () => {
 
   return (
     <select role='combobox' className='w-32 border border-slate-400 rounded-sm-within:outline-2 p-0.5 rounded-sm focus-within:outline-violet-500 capitalize' onChange={handleOnChange} defaultValue='descending'>
-      <option role='option' value="descending">Descending</option>
-      <option role='option' value="ascending">Ascending</option>
+      <option value="descending">Descending</option>
+      <option value="ascending">Ascending</option>
     </select>
   )
 }

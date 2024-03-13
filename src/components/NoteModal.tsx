@@ -114,15 +114,13 @@ const NoteModal = memo((props: Props) => {
                 </div>
                 <div className='h-0.5 bg-gray-200 mt-4'/>
                 <button
-                  disabled={titleInputRef.current?.value === '' || descriptionInputRef.current?.value === '' ? true : false}
+                  disabled={titleInputRef.current?.value === '' || descriptionInputRef.current?.value === ''}
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
                   onClick={data === undefined ? createNewNote : updateNote}
                 >
-                  {POSTLoading || PUTLoading ? 
-                    <Spinner className='h-6 w-6 border-[3px]'/> :
-                    data === undefined ? 'Create' : 'Update'
-                  }
+                  {POSTLoading || PUTLoading && <Spinner className='h-6 w-6 border-[3px]'/>}
+                  {data === undefined ? 'Create' : 'Update'}
                 </button>
               </Dialog.Panel>
             </Transition.Child>

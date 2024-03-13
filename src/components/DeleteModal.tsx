@@ -62,7 +62,7 @@ const DeleteModal = memo((props: Props) => {
                   Delete Confirmation
                 </Dialog.Title>
                 <p className='text-slate-500'>Are you sure you want to delete
-                  <span className='text-black font-medium'> {title}</span>
+                  {' '}<span className='text-black font-medium'>{title}</span>{''}
                   ? this action cannot be undone.
                 </p>
                 <div className='flex self-center gap-4'>
