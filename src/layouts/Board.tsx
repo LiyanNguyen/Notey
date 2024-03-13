@@ -3,6 +3,7 @@ import { EmptyBoard, ErrorBoard, LoadingBoard, NoteCard } from "../components"
 import { GET_Notes } from "../api"
 import { useRecoilState } from 'recoil';
 import { ascendingState, colorState } from "../global";
+import { Note } from "../types/Note";
 
 const Board = () => {
   const [ascending] = useRecoilState(ascendingState)
@@ -22,7 +23,7 @@ const Board = () => {
           {isLoading && <LoadingBoard />}
           {data?.error || isError ?  <ErrorBoard /> : null}
           {data?.data?.length === 0 && <EmptyBoard />}
-          {data?.data?.map((item, index) => <NoteCard key={index} data={item} />)}
+          {data?.data?.map((item : Note) => <NoteCard key={item.id} data={item} />)}
         </div>
       </div>
     </div>

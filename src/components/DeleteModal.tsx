@@ -4,6 +4,8 @@ import { Dispatch, SetStateAction, Fragment, memo } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { DELETE_deleteNote } from '../api'
 import { Spinner } from '.'
+import { useRecoilState } from 'recoil'
+import { ascendingState, colorState } from '../global'
 
 type Props = {
   id: string
@@ -16,9 +18,12 @@ const DeleteModal = memo((props: Props) => {
   const { id, title, isOpen, setIsOpen } = props
   const queryClient = useQueryClient()
 
+  const [ascending] = useRecoilState(ascendingState)
+  const [color] = useRecoilState(colorState)
+
   // FUNCTIONS
   const closeModal = () => setIsOpen(false)
-  const refetchNotes = () => queryClient.invalidateQueries({ queryKey: ['Notes'] })
+  const refetchNotes = () => queryClient.invalidateQueries({ queryKey: ['Notes', ascending, color] })
   const deleteNote = () => mutateDeleteNote()
 
   // HTTP DELETE
