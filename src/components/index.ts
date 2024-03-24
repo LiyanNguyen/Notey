@@ -5,9 +5,8 @@ import Spinner from "./Spinner";
 import EmptyBoard from "./EmptyBoard";
 import ErrorBoard from "./ErrorBoard";
 import LoadingBoard from "./LoadingBoard";
-import RatingDropdown from "./RatingDropdown";
-import ColorDropdown from "./ColorDropdown";
 import NavbarContent from "./NavbarContent";
+import Dropdown from "./Dropdown";
 
 export {
   NoteModal,
@@ -17,7 +16,6 @@ export {
   EmptyBoard,
   ErrorBoard,
   LoadingBoard,
-  RatingDropdown,
-  ColorDropdown,
-  NavbarContent
-}
+  NavbarContent,
+  Dropdown,
+};
