@@ -36,7 +36,7 @@ describe('NoteModal', () => {
   
   it('renders correctly when a data is passed', async () => {
     const sampleData: Note = {
-      id: '123456',
+      _id: '123456',
       title: 'Sample Title',
       description: 'Sample Description',
       rating: 8,

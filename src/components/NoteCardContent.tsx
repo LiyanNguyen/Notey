@@ -25,29 +25,47 @@ const NoteCardContent = memo((props: Props) => {
   } = props
 
   return (
-    <div className={`bg-white border border-violet-100 shadow-md w-72 ${borderColor} border-t-2`}>
-      <div className='flex flex-col gap-2 p-4 pt-2'>
+    <fieldset
+      role="group"
+      className={`bg-white border border-violet-100 shadow-md w-72 ${borderColor} border-t-2`}
+    >
+      <div className="flex flex-col gap-2 p-4 pt-2">
         <div className="flex justify-between items-center">
-          <h3 className='font-medium text-lg break-all'>{title}</h3>
-          <p role='note' className={`w-7 h-7 flex items-center justify-center ${ratingColor} rounded text-white`}>{rating}</p>
+          <h3 className="font-medium text-lg break-all">{title}</h3>
+          <p
+            role="note"
+            className={`w-7 h-7 flex items-center justify-center ${ratingColor} rounded text-white`}
+          >
+            {rating}
+          </p>
         </div>
-        <footer className='text-slate-500'>{description}</footer>
-        <div className='flex justify-between items-center'>
-          <time className='text-slate-400 text-xs'>{dateDisplay}</time>
+        <footer role="contentinfo" className="text-slate-500">
+          {description}
+        </footer>
+        <div className="flex justify-between items-center">
+          <time role="time" className="text-slate-400 text-xs">
+            {dateDisplay}
+          </time>
           <div className="flex gap-2">
-            <button onClick={openEditModal} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-all">
-              <span className='hidden'>Edit</span>
+            <button
+              onClick={openEditModal}
+              className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-all"
+            >
+              <span className="hidden">Edit</span>
               <PencilIcon className="h-4 w-4 text-gray-500" />
             </button>
-            <button onClick={openDeleteModal} className="p-2 rounded-full bg-slate-100 hover:bg-slate-200">
-              <span className='hidden'>Delete</span>
+            <button
+              onClick={openDeleteModal}
+              className="p-2 rounded-full bg-slate-100 hover:bg-slate-200"
+            >
+              <span className="hidden">Delete</span>
               <TrashIcon className="h-4 w-4 text-gray-500" />
             </button>
           </div>
         </div>
       </div>
-    </div>
-  )
+    </fieldset>
+  );
 })
 
 export default NoteCardContent

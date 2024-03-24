@@ -10,7 +10,7 @@ const queryClient = new QueryClient()
 describe('NoteCard', () => {
   it('renders corectly showing information', async () => {
     const sampleData: Note = {
-      id: '123456',
+      _id: '123456',
       title: 'Sample Title',
       description: 'Sample Description',
       rating: 8,
@@ -39,7 +39,7 @@ describe('NoteCard', () => {
 
   it('renders a color blue card', async () => {
     const sampleData: Note = {
-      id: '123456',
+      _id: '123456',
       title: 'Sample Title',
       description: 'Sample Description',
       rating: 8,
@@ -62,7 +62,7 @@ describe('NoteCard', () => {
 
   it('renders a color red card', async () => {
     const sampleData: Note = {
-      id: '123456',
+      _id: '123456',
       title: 'Sample Title',
       description: 'Sample Description',
       rating: 8,
@@ -85,7 +85,7 @@ describe('NoteCard', () => {
 
   it('renders a color yellow card', async () => {
     const sampleData: Note = {
-      id: '123456',
+      _id: '123456',
       title: 'Sample Title',
       description: 'Sample Description',
       rating: 8,
@@ -108,7 +108,7 @@ describe('NoteCard', () => {
 
   it('renders a color green card', async () => {
     const sampleData: Note = {
-      id: '123456',
+      _id: '123456',
       title: 'Sample Title',
       description: 'Sample Description',
       rating: 8,
@@ -131,7 +131,7 @@ describe('NoteCard', () => {
 
   it('renders a color slate card', async () => {
     const sampleData: Note = {
-      id: '123456',
+      _id: '123456',
       title: 'Sample Title',
       description: 'Sample Description',
       rating: 8,

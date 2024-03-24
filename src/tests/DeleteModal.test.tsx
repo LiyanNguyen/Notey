@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { DeleteModal } from '../components'
 import userEvent from '@testing-library/user-event'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { RecoilRoot } from 'recoil'
 
 const queryClient = new QueryClient()
 
@@ -10,7 +11,9 @@ describe('DeleteModal', () => {
   it('renders correctly', async () => {
     render(
       <QueryClientProvider client={queryClient} >
-        <DeleteModal id='123456' title='Sample Title' isOpen setIsOpen={() => null} />
+        <RecoilRoot>
+          <DeleteModal id='123456' title='Sample Title' isOpen setIsOpen={() => null} />
+        </RecoilRoot>
       </QueryClientProvider>
     )
 
@@ -31,7 +34,9 @@ describe('DeleteModal', () => {
 
     render(
       <QueryClientProvider client={queryClient} >
-        <DeleteModal id='123456' title='Sample Title' isOpen setIsOpen={setIsOpen} />
+        <RecoilRoot>
+          <DeleteModal id='123456' title='Sample Title' isOpen setIsOpen={setIsOpen} />
+        </RecoilRoot>
       </QueryClientProvider>
     )
 

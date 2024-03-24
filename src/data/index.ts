@@ -7,7 +7,7 @@ export const ratingOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 export const fakeArray: Note[] = [
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     title: faker.commerce.product(),
     description: faker.commerce.productDescription(),
     rating: 7,
@@ -15,7 +15,7 @@ export const fakeArray: Note[] = [
     createdAt: 'string',
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     title: faker.commerce.product(),
     description: faker.commerce.productDescription(),
     rating: 6,
@@ -23,7 +23,7 @@ export const fakeArray: Note[] = [
     createdAt: 'string',
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     title: faker.commerce.product(),
     description: faker.commerce.productDescription(),
     rating: 8,
@@ -31,7 +31,7 @@ export const fakeArray: Note[] = [
     createdAt: 'string',
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     title: faker.commerce.product(),
     description: faker.commerce.productDescription(),
     rating: 5,
@@ -39,7 +39,7 @@ export const fakeArray: Note[] = [
     createdAt: 'string',
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     title: faker.commerce.product(),
     description: faker.commerce.productDescription(),
     rating: 4,

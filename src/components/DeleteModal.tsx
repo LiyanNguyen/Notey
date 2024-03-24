@@ -18,13 +18,13 @@ const DeleteModal = memo((props: Props) => {
   const { id, title, isOpen, setIsOpen } = props;
   const queryClient = useQueryClient();
 
-  const [ascending] = useRecoilState(ratingState);
+  const [rating] = useRecoilState(ratingState);
   const [color] = useRecoilState(colorState);
 
   // FUNCTIONS
   const closeModal = () => setIsOpen(false);
   const refetchNotes = () =>
-    queryClient.invalidateQueries({ queryKey: ["Notes", ascending, color] });
+    queryClient.invalidateQueries({ queryKey: ["Notes", rating, color] });
 
   // HTTP DELETE
   const { mutate: mutateDeleteNote, isLoading } = useMutation({
