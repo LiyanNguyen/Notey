@@ -1,36 +1,41 @@
-import { Transition, Dialog } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Dispatch, SetStateAction, Fragment, memo } from 'react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { DELETE_deleteNote } from '../api'
-import { Spinner } from '.'
-import { useRecoilState } from 'recoil'
-import { ascendingState, colorState } from '../global'
+import { Transition, Dialog } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Dispatch, SetStateAction, Fragment, memo } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Spinner } from ".";
+import { useRecoilState } from "recoil";
+import { ratingState, colorState } from "../global";
+import { DELETE_Note } from "../api";
 
 type Props = {
-  id: string
-  title: string
-  isOpen: boolean
-  setIsOpen: Dispatch<SetStateAction<boolean>>
-}
+  id: string;
+  title: string;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+};
 
 const DeleteModal = memo((props: Props) => {
-  const { id, title, isOpen, setIsOpen } = props
-  const queryClient = useQueryClient()
+  const { id, title, isOpen, setIsOpen } = props;
+  const queryClient = useQueryClient();
 
-  const [ascending] = useRecoilState(ascendingState)
-  const [color] = useRecoilState(colorState)
+  const [ascending] = useRecoilState(ratingState);
+  const [color] = useRecoilState(colorState);
 
   // FUNCTIONS
-  const closeModal = () => setIsOpen(false)
-  const refetchNotes = () => queryClient.invalidateQueries({ queryKey: ['Notes', ascending, color] })
-  const deleteNote = () => mutateDeleteNote()
+  const closeModal = () => setIsOpen(false);
+  const refetchNotes = () =>
+    queryClient.invalidateQueries({ queryKey: ["Notes", ascending, color] });
 
   // HTTP DELETE
   const { mutate: mutateDeleteNote, isLoading } = useMutation({
-    mutationFn: () => DELETE_deleteNote(id),
-    onSuccess: () => { refetchNotes(); closeModal(); },
-  })
+    mutationFn: async () => {
+      return DELETE_Note(id);
+    },
+    onSuccess: () => {
+      refetchNotes();
+      closeModal();
+    },
+  });
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -59,24 +64,35 @@ const DeleteModal = memo((props: Props) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3">
-                <button onClick={closeModal} className='absolute right-3 top-3 p-1.5 rounded-full bg-slate-50 hover:bg-slate-200 transition-all'>
-                  <span className='hidden'>Close</span>
+                <button
+                  onClick={closeModal}
+                  className="absolute right-3 top-3 p-1.5 rounded-full bg-slate-50 hover:bg-slate-200 transition-all"
+                >
+                  <span className="hidden">Close</span>
                   <XMarkIcon className="h-5 w-5 text-gray-500" />
                 </button>
-                <Dialog.Title as="h3" className="text-lg font-medium text-center">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium text-center"
+                >
                   Delete Confirmation
                 </Dialog.Title>
-                <p className='text-slate-500'>Are you sure you want to delete
-                  {' '}<span className='text-black font-medium'>{title}</span>{''}
-                  ? this action cannot be undone.
+                <p className="text-slate-500">
+                  Are you sure you want to delete{" "}
+                  <span className="text-black font-medium">{title}</span>
+                  {""}? this action cannot be undone.
                 </p>
-                <div className='flex self-center gap-4'>
+                <div className="flex self-center gap-4">
                   <button
-                    onClick={deleteNote}
+                    onClick={() => mutateDeleteNote()}
                     type="button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 self-center w-28"
                   >
-                    {isLoading ? <Spinner className='h-6 w-6 border-[3px]' /> : 'Delete'}
+                    {isLoading ? (
+                      <Spinner className="h-6 w-6 border-[3px]" />
+                    ) : (
+                      "Delete"
+                    )}
                   </button>
                   <button
                     onClick={closeModal}
@@ -92,7 +108,7 @@ const DeleteModal = memo((props: Props) => {
         </div>
       </Dialog>
     </Transition>
-  )
-})
+  );
+});
 
-export default DeleteModal
+export default DeleteModal;

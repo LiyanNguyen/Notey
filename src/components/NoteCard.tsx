@@ -10,7 +10,7 @@ type Props = {
 
 const NoteCard = (props: Props) => {
   const { data } = props
-  const { id, title, description, rating, color, createdAt } = data
+  const { _id, title, description, rating, color, createdAt } = data
   const [borderColor, setBorderColor] = useState<string>('')
   const [ratingColor, setRatingColor] = useState<string>('')
   const [isEditing, setIsEditing] = useState<boolean>(false)
@@ -46,7 +46,7 @@ const NoteCard = (props: Props) => {
         openDeleteModal={openDeleteModal}
       />
       <NoteModal data={data} isOpen={isEditing} setIsOpen={setIsEditing} />
-      <DeleteModal id={id} title={title} isOpen={isDeleting} setIsOpen={setIsDeleting}/>
+      <DeleteModal id={_id} title={title} isOpen={isDeleting} setIsOpen={setIsDeleting}/>
     </>
   )
 }

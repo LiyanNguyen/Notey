@@ -1,12 +1,12 @@
 import { useRecoilState } from 'recoil'
-import { ascendingState } from '../global'
+import { ratingState } from '../global'
 import { ChangeEvent } from 'react'
 
 const RatingDropdown = () => {
-  const [, setAscending] = useRecoilState(ascendingState)
+  const [, setAscending] = useRecoilState(ratingState)
 
   const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    e.target.value === 'ascending' ? setAscending(true) : setAscending(false)
+    setAscending(e.target.value)
   }
 
   return (

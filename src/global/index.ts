@@ -1,9 +1,9 @@
 import { atom } from "recoil";
 
-export const ascendingState = atom({
-  key: 'ascendingState',
-  default: false,
-})
+export const ratingState = atom({
+  key: "ratingState",
+  default: "ascending",
+});
 
 export const colorState = atom({
   key: 'colorState',
