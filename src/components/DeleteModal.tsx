@@ -3,8 +3,6 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Dispatch, SetStateAction, Fragment, memo } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Spinner } from ".";
-import { useRecoilState } from "recoil";
-import { ratingState, colorState } from "../global";
 import { DELETE_Note } from "../api";
 
 type Props = {
@@ -18,13 +16,10 @@ const DeleteModal = memo((props: Props) => {
   const { id, title, isOpen, setIsOpen } = props;
   const queryClient = useQueryClient();
 
-  const [rating] = useRecoilState(ratingState);
-  const [color] = useRecoilState(colorState);
-
   // FUNCTIONS
   const closeModal = () => setIsOpen(false);
   const refetchNotes = () =>
-    queryClient.invalidateQueries({ queryKey: ["Notes", rating, color] });
+    queryClient.invalidateQueries({ queryKey: ["Notes"] });
 
   // HTTP DELETE
   const { mutate: mutateDeleteNote, isLoading } = useMutation({
