@@ -161,7 +161,7 @@ const NoteModal = memo((props: Props) => {
                       defaultValue={data ? data.color : "blue"}
                       name="color"
                       id="color"
-                      className="w-full border border-slate-400 rounded-sm-within:outline-2 p-1 rounded-sm focus-within:outline-violet-500 capitalize"
+                      className="w-full rounded border p-1.5 bg-transparent border-slate-400 rounded-sm-within:outline-2 focus-within:outline-violet-500 capitalize"
                     >
                       {colorOptions.map((item) => (
                         <option className="capitalize" key={item} value={item}>
@@ -179,7 +179,7 @@ const NoteModal = memo((props: Props) => {
                       defaultValue={data ? data.rating : "1"}
                       name="rating"
                       id="rating"
-                      className="w-full border border-slate-400 rounded-sm-within:outline-2 p-1 rounded-sm focus-within:outline-violet-500"
+                      className="w-full rounded border p-1.5 bg-transparent border-slate-400 rounded-sm-within:outline-2 focus-within:outline-violet-500 capitalize"
                     >
                       {ratingOptions.map((item) => (
                         <option key={item} value={item}>

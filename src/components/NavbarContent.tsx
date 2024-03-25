@@ -26,7 +26,7 @@ const NavbarContent = memo(({ openModal }: { openModal: () => void }) => {
           />
         </div>
         <button
-          data-testID="new-note-button"
+          data-testid="new-note-button"
           onClick={openModal}
           className=" border border-slate-400 h-max py-1.5 px-2.5 rounded-md text-white hover:text-violet-950 hover:bg-white transition-all flex items-center"
         >
