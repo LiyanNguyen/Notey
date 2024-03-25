@@ -1,44 +1,40 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Dispatch, Fragment, SetStateAction, memo, useRef } from "react";
+import { Dispatch, Fragment, SetStateAction, useRef, useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Note } from "../types/Note";
 import { colorOptions, ratingOptions } from "../data";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Spinner } from ".";
-import { PATCH_Note } from "../api";
+import { POST_Note } from "../api";
 
 type Props = {
-  data: Note;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const NoteModal = memo((props: Props) => {
-  const { data, isOpen, setIsOpen } = props;
-  const titleInputRef = useRef<HTMLInputElement>(null);
-  const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
+const CreateModal = (props: Props) => {
+  const { isOpen, setIsOpen } = props;
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const colorDropdownRef = useRef<HTMLSelectElement>(null);
   const ratingDropdownRef = useRef<HTMLSelectElement>(null);
   const queryClient = useQueryClient();
 
   // FUNCTIONS
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => {
+    setIsOpen(false)
+    setTitle("")
+    setDescription("")
+  };
   const refetchNotes = () =>
     queryClient.invalidateQueries({ queryKey: ["Notes"] });
 
-  // HTTP PATCH
-  const { mutate: PATCHMutate, isLoading: PATCHLoading } = useMutation({
+  // HTTP POST
+  const { mutate: POSTMutate, isLoading: POSTLoading } = useMutation({
     mutationFn: async () => {
-      if (
-        titleInputRef.current &&
-        descriptionInputRef.current &&
-        colorDropdownRef.current &&
-        ratingDropdownRef.current
-      )
-        return PATCH_Note(
-          data._id,
-          titleInputRef.current.value,
-          descriptionInputRef.current.value,
+      if (colorDropdownRef.current && ratingDropdownRef.current)
+        return POST_Note(
+          title,
+          description,
           colorDropdownRef.current.value,
           parseInt(ratingDropdownRef.current.value)
         );
@@ -49,8 +45,6 @@ const NoteModal = memo((props: Props) => {
     },
   });
 
-
-  // WIP: REDESIGN THIS - so its not the same as create modal
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -89,32 +83,43 @@ const NoteModal = memo((props: Props) => {
                   as="h3"
                   className="text-lg font-medium text-center"
                 >
-                  {data === undefined ? "Create New" : "Edit"} Note
+                  Create New Note
                 </Dialog.Title>
                 <div>
-                  <label htmlFor="title" className="text-slate-500 text-sm">
-                    Title
-                  </label>
+                  <div className="flex flex-row items-center justify-between">
+                    <label htmlFor="title" className="text-slate-500 text-sm">
+                      Title
+                    </label>
+                    {title.length >= 12 && (
+                      <span className="text-slate-400 text-xs">
+                        {title.length}/25
+                      </span>
+                    )}
+                  </div>
                   <input
-                    ref={titleInputRef}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     maxLength={25}
-                    defaultValue={data ? data.title : ""}
                     id="title"
                     type="text"
                     className="w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500"
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="description"
-                    className="text-slate-500 text-sm"
-                  >
-                    Description
-                  </label>
+                  <div className="flex flex-row items-center justify-between">
+                    <label htmlFor="title" className="text-slate-500 text-sm">
+                      Description
+                    </label>
+                    {description.length >= 75 && (
+                      <span className="text-slate-400 text-xs">
+                        {description.length}/150
+                      </span>
+                    )}
+                  </div>
                   <textarea
-                    ref={descriptionInputRef}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     maxLength={150}
-                    defaultValue={data ? data.description : ""}
                     id="description"
                     rows={4}
                     className="w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none"
@@ -127,12 +132,12 @@ const NoteModal = memo((props: Props) => {
                     </label>
                     <select
                       ref={colorDropdownRef}
-                      defaultValue={data ? data.color : "blue"}
+                      defaultValue={"blue"}
                       name="color"
                       id="color"
                       className="w-full rounded border p-1.5 bg-transparent border-slate-400 rounded-sm-within:outline-2 focus-within:outline-violet-500 capitalize"
                     >
-                      {colorOptions.map((item) => (
+                      {colorOptions.slice(1).map((item) => (
                         <option className="capitalize" key={item} value={item}>
                           {item}
                         </option>
@@ -145,7 +150,7 @@ const NoteModal = memo((props: Props) => {
                     </label>
                     <select
                       ref={ratingDropdownRef}
-                      defaultValue={data ? data.rating : "1"}
+                      defaultValue={"1"}
                       name="rating"
                       id="rating"
                       className="w-full rounded border p-1.5 bg-transparent border-slate-400 rounded-sm-within:outline-2 focus-within:outline-violet-500 capitalize"
@@ -160,15 +165,12 @@ const NoteModal = memo((props: Props) => {
                 </div>
                 <div className="h-0.5 bg-gray-200 mt-4" />
                 <button
-                  disabled={
-                    titleInputRef.current?.value === "" ||
-                    descriptionInputRef.current?.value === ""
-                  }
+                  disabled={title.length < 5 || description.length < 5}
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
-                  onClick={() => PATCHMutate()}
+                  onClick={() => POSTMutate()}
                 >
-                  {PATCHLoading ? <Spinner className="h-6 w-6 border-[3px]" /> : "Update"}
+                  {POSTLoading ? <Spinner className="h-6 w-6 border-[3px]" /> : "Create"}
                 </button>
               </Dialog.Panel>
             </Transition.Child>
@@ -177,6 +179,6 @@ const NoteModal = memo((props: Props) => {
       </Dialog>
     </Transition>
   );
-});
+};
 
-export default NoteModal;
+export default CreateModal;

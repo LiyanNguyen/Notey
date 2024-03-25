@@ -7,8 +7,11 @@ import ErrorBoard from "./ErrorBoard";
 import LoadingBoard from "./LoadingBoard";
 import NavbarContent from "./NavbarContent";
 import Dropdown from "./Dropdown";
+import CreateModal from "./CreateModal";
+
 
 export {
+  CreateModal,
   NoteModal,
   NoteCard,
   DeleteModal,

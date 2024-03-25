@@ -7,42 +7,19 @@ import { Note } from '../types/Note'
 
 const queryClient = new QueryClient()
 
+const sampleData: Note = {
+  _id: "123456",
+  title: "Sample Title",
+  description: "Sample Description",
+  rating: 8,
+  color: "green",
+  createdAt: "16-07-2023",
+};
+
 describe('NoteModal', () => {
-  it('renders correctly when no data is passed', async () => {
-    render(
-      <QueryClientProvider client={queryClient} >
-        <NoteModal isOpen setIsOpen={() => null} />
-      </QueryClientProvider>
-    )
-    
-    const headingElement = await screen.findByRole('heading', { level: 3, name: 'Create New Note' })
-    const titleInputElement = await screen.findByRole('textbox', { name: 'Title'})
-    const descriptionTextAreaElement = await screen.findByRole('textbox', { name: 'Description' })
-    const colorSelectElement = await screen.findByRole('combobox', { name: 'Color' })
-    const ratingSelectElement = await screen.findByRole('combobox', { name: 'Rating' })
-    const createNoteButton = await screen.findByRole('button', { name: 'Create' })
-    
-    expect(headingElement).toBeInTheDocument()
-    expect(titleInputElement).toBeInTheDocument()
-    expect(titleInputElement).toHaveValue('')
-    expect(descriptionTextAreaElement).toBeInTheDocument()
-    expect(descriptionTextAreaElement).toHaveValue('')
-    expect(colorSelectElement).toBeInTheDocument()
-    expect(colorSelectElement).toHaveValue('blue')
-    expect(ratingSelectElement).toBeInTheDocument()
-    expect(ratingSelectElement).toHaveValue('1')
-    expect(createNoteButton).toBeInTheDocument()
-  })
   
   it('renders correctly when a data is passed', async () => {
-    const sampleData: Note = {
-      _id: '123456',
-      title: 'Sample Title',
-      description: 'Sample Description',
-      rating: 8,
-      color: 'green',
-      createdAt: '16-07-2023'
-    }
+    
     render(
       <QueryClientProvider client={queryClient} >
         <NoteModal data={sampleData} isOpen setIsOpen={() => null} />
@@ -72,10 +49,10 @@ describe('NoteModal', () => {
     const setIsOpen = vi.fn()
     
     render(
-      <QueryClientProvider client={queryClient} >
-        <NoteModal isOpen setIsOpen={setIsOpen} />
+      <QueryClientProvider client={queryClient}>
+        <NoteModal data={sampleData} isOpen setIsOpen={setIsOpen} />
       </QueryClientProvider>
-    )
+    );
 
     const XButton = await screen.findByRole('button', { name: 'Close' })
     

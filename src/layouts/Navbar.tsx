@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { NoteModal } from "../components";
+import { CreateModal } from "../components";
 import NavbarContent from "../components/NavbarContent";
 
 const Navbar = () => {
@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <>
       <NavbarContent openModal={openModal} />
-      <NoteModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <CreateModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };
