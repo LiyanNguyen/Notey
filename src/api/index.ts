@@ -3,7 +3,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export const GET_Notes = async (rating: string, color: string, search: string) => {
   return await axios
-    .get(`${API_URL}/notes?color=${color}&rating=${rating}&title=${search}`)
+    .get(`${API_URL}/notes?color=${color}&rating=${rating}&search=${search}`)
     .then((response) => {
       return response.data;
     })
