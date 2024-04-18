@@ -1,4 +1,4 @@
-import { atom, useRecoilCallback } from "recoil";
+import { atom } from "recoil";
 
 export const ratingState = atom({
   key: "ratingState",
