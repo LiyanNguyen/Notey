@@ -39,7 +39,7 @@ export const Blue: Story = {
     title: 'Sample Blue Note',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ipsam itaque vel fuga doloremque ducimus.',
     rating: 8,
-    dateDisplay: '18-07-2023',
+    createdDate: '18-07-2023',
     openEditModal: () => null,
     openDeleteModal: () => null,
   }
@@ -52,7 +52,7 @@ export const Red: Story = {
     title: 'Sample Red Note',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ipsam itaque vel fuga doloremque ducimus.',
     rating: 8,
-    dateDisplay: '18-07-2023',
+    createdDate: '18-07-2023',
     openEditModal: () => null,
     openDeleteModal: () => null,
   }
@@ -65,7 +65,7 @@ export const Yellow: Story = {
     title: 'Sample Yelow Note',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ipsam itaque vel fuga doloremque ducimus.',
     rating: 8,
-    dateDisplay: '18-07-2023',
+    createdDate: '18-07-2023',
     openEditModal: () => null,
     openDeleteModal: () => null,
   }
@@ -78,7 +78,7 @@ export const Green: Story = {
     title: 'Sample Green Note',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ipsam itaque vel fuga doloremque ducimus.',
     rating: 8,
-    dateDisplay: '18-07-2023',
+    createdDate: '18-07-2023',
     openEditModal: () => null,
     openDeleteModal: () => null,
   }
@@ -91,7 +91,7 @@ export const Slate: Story = {
     title: 'Sample Slate Note',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ipsam itaque vel fuga doloremque ducimus.',
     rating: 8,
-    dateDisplay: '18-07-2023',
+    createdDate: '18-07-2023',
     openEditModal: () => null,
     openDeleteModal: () => null,
   }
