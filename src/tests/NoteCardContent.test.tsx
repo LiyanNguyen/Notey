@@ -9,7 +9,7 @@ describe('NoteCardContent', () => {
     const ratingColor = 'bg-blue-400'
     const title = 'Sample Title'
     const description = 'Sample Description'
-    const dateDisplay = '11-07-2023'
+    const createdDate = "11-07-2023";
     const rating = 8
 
     render(
@@ -18,12 +18,12 @@ describe('NoteCardContent', () => {
         ratingColor={ratingColor}
         title={title}
         description={description}
-        dateDisplay={dateDisplay}
+        createdDate={createdDate}
         rating={rating}
         openEditModal={() => null}
         openDeleteModal={() => null}
       />
-    )
+    );
     
     const containerDiv = screen.getByRole('group')
     const titleText = screen.getByRole('heading')
@@ -34,7 +34,7 @@ describe('NoteCardContent', () => {
     expect(containerDiv).toHaveClass(borderColor)
     expect(titleText).toHaveTextContent(title)
     expect(descriptionText).toHaveTextContent(description)
-    expect(dateText).toHaveTextContent(dateDisplay)
+    expect(dateText).toHaveTextContent(createdDate)
     expect(ratingBox).toHaveTextContent(String(rating))
     expect(ratingBox).toHaveClass(ratingColor)
   })
@@ -47,7 +47,7 @@ describe('NoteCardContent', () => {
         ratingColor='bg-blue-400'
         title='Sample Title'
         description='Sample Description'
-        dateDisplay='11-07-2023'
+        createdDate='11-07-2023'
         rating={8}
         openEditModal={openEditModal}
         openDeleteModal={() => null}
@@ -69,7 +69,7 @@ describe('NoteCardContent', () => {
         ratingColor='bg-blue-400'
         title='Sample Title'
         description='Sample Description'
-        dateDisplay='11-07-2023'
+        createdDate='11-07-2023'
         rating={8}
         openEditModal={() => null}
         openDeleteModal={openDeleteModal}

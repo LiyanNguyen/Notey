@@ -8,6 +8,7 @@ import LoadingBoard from "./LoadingBoard";
 import NavbarContent from "./NavbarContent";
 import Dropdown from "./Dropdown";
 import CreateModal from "./CreateModal";
+import SearchBar from "./SearchBar";
 
 
 export {
@@ -21,4 +22,5 @@ export {
   LoadingBoard,
   NavbarContent,
   Dropdown,
+  SearchBar,
 };

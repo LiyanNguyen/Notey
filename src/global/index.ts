@@ -9,3 +9,8 @@ export const colorState = atom({
   key: 'colorState',
   default: 'all',
 })
+
+export const searchString = atom({
+  key: "searchString",
+  default: "",
+});

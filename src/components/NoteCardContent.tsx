@@ -7,7 +7,7 @@ type Props = {
   title: string
   description: string
   rating: number
-  dateDisplay: string
+  createdDate: string
   openEditModal: () => void
   openDeleteModal: () => void
 }
@@ -19,7 +19,7 @@ const NoteCardContent = memo((props: Props) => {
     title,
     description,
     rating,
-    dateDisplay,
+    createdDate,
     openEditModal,
     openDeleteModal
   } = props
@@ -44,7 +44,7 @@ const NoteCardContent = memo((props: Props) => {
         </footer>
         <div className="flex justify-between items-center">
           <time role="time" className="text-slate-400 text-xs">
-            {dateDisplay}
+            {createdDate}
           </time>
           <div className="flex gap-2">
             <button

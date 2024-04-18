@@ -14,8 +14,8 @@ const Dropdown = ({
 }) => {
   return (
     <Listbox value={value} onChange={onChange}>
-      <div className="relative mt-1">
-        <Listbox.Button className="w-36 border border-slate-400 rounded-sm-within:outline-2 p-0.5 rounded focus-within:outline-violet-500 capitalize relative  cursor-default bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-violet-500 focus-visible:ring-1 focus-visible:ring-violet/25 focus-visible:ring-offset-2 focus-visible:ring-offset-violet-300 sm:text-sm">
+      <div className="relative">
+        <Listbox.Button className="w-36 border border-slate-400 rounded-sm-within:outline-2 p-0.5 rounded focus-within:outline-violet-500 capitalize relative cursor-default bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-violet-500 focus-visible:ring-1 focus-visible:ring-violet/25 focus-visible:ring-offset-2 focus-visible:ring-offset-violet-300 sm:text-sm">
           <span className="block truncate">{value}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon

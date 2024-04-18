@@ -10,12 +10,12 @@ type Props = {
 
 const NoteCard = (props: Props) => {
   const { data } = props
-  const { _id, title, description, rating, color, createdAt } = data
+  const { _id, title, description, rating, color, createdAt } = data;
   const [borderColor, setBorderColor] = useState<string>('')
   const [ratingColor, setRatingColor] = useState<string>('')
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [isDeleting, setIsDeleting] = useState<boolean>(false)
-  const dateDisplay = formatDate(new Date(createdAt))
+  const createdDate = formatDate(new Date(createdAt))
 
   // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
   useEffect(() => {
@@ -41,14 +41,19 @@ const NoteCard = (props: Props) => {
         title={title}
         description={description}
         rating={rating}
-        dateDisplay={dateDisplay}
+        createdDate={createdDate}
         openEditModal={openEditModal}
         openDeleteModal={openDeleteModal}
       />
       <NoteModal data={data} isOpen={isEditing} setIsOpen={setIsEditing} />
-      <DeleteModal id={_id} title={title} isOpen={isDeleting} setIsOpen={setIsDeleting}/>
+      <DeleteModal
+        id={_id}
+        title={title}
+        isOpen={isDeleting}
+        setIsOpen={setIsDeleting}
+      />
     </>
-  )
+  );
 }
 
 export default NoteCard

@@ -1,19 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { EmptyBoard, ErrorBoard, LoadingBoard, NoteCard } from "../components";
 import { useRecoilState } from "recoil";
-import { ratingState, colorState } from "../global";
+import { ratingState, colorState, searchString } from "../global";
 import { Note } from "../types/Note";
 import { GET_Notes } from "../api";
 
 const Board = () => {
   const [rating] = useRecoilState(ratingState);
   const [color] = useRecoilState(colorState);
+  const [search] = useRecoilState(searchString);
 
   // HTTP GET
   const { isLoading, data, isError } = useQuery({
-    queryKey: ["Notes", rating, color],
+    queryKey: ["Notes", rating, color, search],
     queryFn: () => {
-      return GET_Notes(rating, color);
+      return GET_Notes(rating, color, search);
     },
     refetchOnWindowFocus: false,
   });

@@ -1,14 +1,14 @@
 import { memo } from "react";
 import icon from "../assets/icon.png";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Dropdown } from ".";
+import { Dropdown, SearchBar } from ".";
 import { useRecoilState } from "recoil";
 import { colorState, ratingState } from "../global";
 import { colorOptions } from "../data";
 
 const NavbarContent = memo(({ openModal }: { openModal: () => void }) => {
   const [color, setColor] = useRecoilState(colorState);
-  const [asd, setAscending] = useRecoilState(ratingState);
+  const [rating, setRating] = useRecoilState(ratingState);
 
   return (
     <div className="bg-violet-950 h-20 flex">
@@ -17,11 +17,12 @@ const NavbarContent = memo(({ openModal }: { openModal: () => void }) => {
           <img src={icon} alt="" className=" object-scale-down w-8" />
           <h1 className=" text-white font-medium text-3xl">Notey</h1>
         </div>
-        <div className="hidden sm:flex gap-5 items-center">
+        <div className="flex gap-5">
+          <SearchBar />
           <Dropdown value={color} onChange={setColor} options={colorOptions} />
           <Dropdown
-            value={asd}
-            onChange={setAscending}
+            value={rating}
+            onChange={setRating}
             options={["ascending", "descending"]}
           />
         </div>

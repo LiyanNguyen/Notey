@@ -1,9 +1,9 @@
 import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const GET_Notes = async (rating: string, color: string) => {
+export const GET_Notes = async (rating: string, color: string, search: string) => {
   return await axios
-    .get(`${API_URL}/notes?color=${color}&rating=${rating}`)
+    .get(`${API_URL}/notes?color=${color}&rating=${rating}&title=${search}`)
     .then((response) => {
       return response.data;
     })
