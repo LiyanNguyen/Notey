@@ -1,13 +1,15 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { useRef } from "react";
-import { useRecoilState } from "recoil";
-import { searchString } from "../global";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { currentPage, searchString } from "../global";
 
 const SearchBar = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [, setSearch] = useRecoilState(searchString);
+  const resetPage = useResetRecoilState(currentPage);
 
   const handleSearch = () => {
+    resetPage();
     inputRef.current && setSearch(inputRef.current.value);
   };
 

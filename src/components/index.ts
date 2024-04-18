@@ -9,7 +9,7 @@ import NavbarContent from "./NavbarContent";
 import Dropdown from "./Dropdown";
 import CreateModal from "./CreateModal";
 import SearchBar from "./SearchBar";
-
+import Pagination from "./Pagination";
 
 export {
   CreateModal,
@@ -23,4 +23,5 @@ export {
   NavbarContent,
   Dropdown,
   SearchBar,
+  Pagination,
 };
