@@ -4,25 +4,12 @@ import { currentPage } from "../global";
 const Pagination = ({ totalPages }: { totalPages: number }) => {
   const [page, setPage] = useRecoilState(currentPage);
 
-  const renderPageList = () => {
-    const buttons = [];
-    for (let i = 1; i <= totalPages; i++) {
-      buttons.push(
-        <button
-          key={i}
-          className={`relative inline-flex items-center ${
-            page === i
-              ? "bg-violet-500 text-white"
-              : "text-slate-500 hover:bg-slate-200"
-          } px-4 py-2 text-sm font-semibold focus:z-20 focus:outline-offset-0 ring-1 ring-inset ring-gray-300 focus:outline-violet-500 `}
-          onClick={() => setPage(i)}
-        >
-          {i}
-        </button>
-      );
-    }
+  const firstPage = () => {
+    if (page !== 1) setPage(1);
+  };
 
-    return buttons;
+  const lastPage = () => {
+    if (page === totalPages) setPage(totalPages);
   };
 
   const previousPage = () => {
@@ -39,40 +26,87 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
       aria-label="Pagination"
     >
       <button
+        onClick={firstPage}
+        className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
+      >
+        <span className="sr-only">First</span>
+        <svg
+          className="h-4 w-4 text-slate-500"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {" "}
+          <polyline points="11 17 6 12 11 7" />{" "}
+          <polyline points="18 17 13 12 18 7" />
+        </svg>
+      </button>
+      <button
         onClick={previousPage}
-        className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0"
+        className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
       >
         <span className="sr-only">Previous</span>
+
         <svg
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
+          className="h-4 w-4 text-slate-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
           <path
-            fillRule="evenodd"
-            d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
-            clipRule="evenodd"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M15 19l-7-7 7-7"
           />
         </svg>
       </button>
-      {renderPageList()}
+      <p className="relative inline-flex items-center text-slate-500 px-4 py-2 text-sm font-semibold focus:z-20 focus:outline-offset-0 ring-1 ring-inset ring-gray-300 focus:outline-violet-500">
+        {page} / {totalPages}
+      </p>
+
       <button
         onClick={nextPage}
-        className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0"
+        className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
       >
         <span className="sr-only">Next</span>
         <svg
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
+          className="h-4 w-4 text-slate-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
           <path
-            fillRule="evenodd"
-            d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-            clipRule="evenodd"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M9 5l7 7-7 7"
           />
+        </svg>
+      </button>
+      <button
+        onClick={lastPage}
+        className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
+      >
+        <span className="sr-only">Last</span>
+        <svg
+          className="h-4 w-4 text-slate-500"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {" "}
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <polyline points="7 7 12 12 7 17" />{" "}
+          <polyline points="13 7 18 12 13 17" />
         </svg>
       </button>
     </nav>
