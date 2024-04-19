@@ -9,7 +9,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
   };
 
   const lastPage = () => {
-    if (page === totalPages) setPage(totalPages);
+    if (page !== totalPages) setPage(totalPages);
   };
 
   const previousPage = () => {
