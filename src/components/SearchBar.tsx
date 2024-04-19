@@ -24,7 +24,7 @@ const SearchBar = () => {
       />
       <button
         onClick={handleSearch}
-        className=" rounded-tr rounded-br  bg-slate-200 px-2 text-sm font-medium hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 h-full items-center"
+        className=" rounded-tr rounded-br  bg-slate-200 px-2 text-sm font-medium hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 items-center"
       >
         <MagnifyingGlassIcon className="h-5 w-5 text-slate-500" />
       </button>

@@ -22,7 +22,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
 
   return (
     <nav
-      className="isolate inline-flex -space-x-px rounded-md shadow-sm self-center mb-4"
+      className="flex py-2 self-center absolute bottom-0 bg-violet-50 w-full justify-center "
       aria-label="Pagination"
     >
       <button

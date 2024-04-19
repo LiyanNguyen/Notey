@@ -31,7 +31,7 @@ export const POST_Note = async (
       rating,
     })
     .then((response) => {
-      console.log(response.data);
+      return response.data;
     })
     .catch((error) => {
       console.error("Error fetching data: ", error);
@@ -53,7 +53,7 @@ export const PATCH_Note = async (
       rating,
     })
     .then((response) => {
-      console.log(response.data);
+      return response.data;
     })
     .catch((error) => {
       console.error("Error fetching data: ", error);
@@ -64,7 +64,7 @@ export const DELETE_Note = async (id: string) => {
   return await axios
     .delete(`${API_URL}/notes/${id}`)
     .then((response) => {
-      console.log(response.data);
+      return response.data;
     })
     .catch((error) => {
       console.error("Error fetching data: ", error);

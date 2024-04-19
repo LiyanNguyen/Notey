@@ -21,8 +21,8 @@ const Board = () => {
   });
 
   return (
-    <div className="bg-violet-50 mx-auto container h-[calc(100vh-80px)] overflow-auto flex flex-col justify-between">
-      <div className="px-3 sm:px-10 py-3 sm:py-5 flex flex-wrap justify-center sm:justify-normal items-start gap-5">
+    <div className="bg-violet-50 h-[calc(100vh)] overflow-auto flex flex-col justify-between">
+      <div className="pt-24 pb-16 px-8 flex flex-wrap gap-5 justify-center">
         {isLoading && <LoadingBoard />}
         {isError && <ErrorBoard />}
         {data?.notes?.length === 0 && <EmptyBoard />}

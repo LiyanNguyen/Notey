@@ -11,13 +11,13 @@ const NavbarContent = memo(({ openModal }: { openModal: () => void }) => {
   const [rating, setRating] = useRecoilState(ratingState);
 
   return (
-    <div className="bg-violet-950 h-20 flex">
+    <div className="bg-violet-950 h-20 flex absolute top-0 w-full">
       <div className="px-10 mx-auto container w-full flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <img src={icon} alt="" className=" object-scale-down w-8" />
           <h1 className=" text-white font-medium text-3xl">Notey</h1>
         </div>
-        <div className="flex gap-5">
+        <div className="hidden lg:flex gap-4">
           <SearchBar />
           <Dropdown value={color} onChange={setColor} options={colorOptions} />
           <Dropdown
