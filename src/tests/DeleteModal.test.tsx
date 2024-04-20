@@ -36,7 +36,7 @@ describe("DeleteModal", () => {
     expect(titleText).toBeInTheDocument();
   });
 
-  it("closes the modal when the X button is clicked", async () => {
+  it("deletes the selected note and closes modal", async () => {
     const setIsOpen = vi.fn();
 
     render(
@@ -50,6 +50,11 @@ describe("DeleteModal", () => {
       </QueryClientProvider>,
       { wrapper: RecoilRoot }
     );
+
+    const deleteButton = await screen.findByRole("button", { name: "Delete" });
+    expect(deleteButton).toBeInTheDocument();
+
+    await userEvent.click(deleteButton);
 
     const XButton = await screen.findByRole("button", { name: "Close" });
 

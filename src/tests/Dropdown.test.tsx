@@ -1,15 +1,23 @@
 import { describe, it, expect } from "vitest";
-import { render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Dropdown } from "../components";
 import { colorOptions } from "../data";
+import { RecoilRoot } from "recoil";
 
 describe("Dropdown", () => {
   const mockOnChange = vi.fn();
-  it("renders correctly", async () => {
+  it("allows user to select options for filtering", async () => {
     render(
-      <Dropdown value={"test"} onChange={mockOnChange} options={colorOptions} />
+      <RecoilRoot>
+        <Dropdown value="all" onChange={mockOnChange} options={colorOptions} />
+      </RecoilRoot>
     );
-    expect(10).toBe(10);
-    // WIP
+    const button = screen.getByRole("button", { name: "all" });
+    fireEvent.click(button);
+
+    const option = screen.getByRole("option", { name: "blue" });
+    fireEvent.click(option);
+
+    expect(mockOnChange).toHaveBeenCalledWith("blue");
   });
 });

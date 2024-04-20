@@ -49,8 +49,6 @@ const NoteModal = memo((props: Props) => {
     },
   });
 
-
-  // WIP: REDESIGN THIS - so its not the same as create modal
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -89,16 +87,17 @@ const NoteModal = memo((props: Props) => {
                   as="h3"
                   className="text-lg font-medium text-center"
                 >
-                  {data === undefined ? "Create New" : "Edit"} Note
+                  Edit Note
                 </Dialog.Title>
                 <div>
                   <label htmlFor="title" className="text-slate-500 text-sm">
                     Title
                   </label>
                   <input
+                    data-testid="title-input"
                     ref={titleInputRef}
                     maxLength={25}
-                    defaultValue={data ? data.title : ""}
+                    defaultValue={data.title}
                     id="title"
                     type="text"
                     className="w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500"
@@ -112,9 +111,10 @@ const NoteModal = memo((props: Props) => {
                     Description
                   </label>
                   <textarea
+                    data-testid="description-input"
                     ref={descriptionInputRef}
                     maxLength={150}
-                    defaultValue={data ? data.description : ""}
+                    defaultValue={data.description}
                     id="description"
                     rows={4}
                     className="w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none"
@@ -127,7 +127,7 @@ const NoteModal = memo((props: Props) => {
                     </label>
                     <select
                       ref={colorDropdownRef}
-                      defaultValue={data ? data.color : "blue"}
+                      defaultValue={data.color}
                       name="color"
                       id="color"
                       className="w-full rounded border p-1.5 bg-transparent border-slate-400 rounded-sm-within:outline-2 focus-within:outline-violet-500 capitalize"
@@ -145,7 +145,7 @@ const NoteModal = memo((props: Props) => {
                     </label>
                     <select
                       ref={ratingDropdownRef}
-                      defaultValue={data ? data.rating : "1"}
+                      defaultValue={data.rating}
                       name="rating"
                       id="rating"
                       className="w-full rounded border p-1.5 bg-transparent border-slate-400 rounded-sm-within:outline-2 focus-within:outline-violet-500 capitalize"
@@ -168,7 +168,11 @@ const NoteModal = memo((props: Props) => {
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
                   onClick={() => PATCHMutate()}
                 >
-                  {PATCHLoading ? <Spinner className="h-6 w-6 border-[3px]" /> : "Update"}
+                  {PATCHLoading ? (
+                    <Spinner className="h-6 w-6 border-[3px]" />
+                  ) : (
+                    "Update"
+                  )}
                 </button>
               </Dialog.Panel>
             </Transition.Child>
