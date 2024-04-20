@@ -16,6 +16,7 @@ const SearchBar = () => {
   return (
     <div className="flex shadow-md">
       <input
+        data-testid="search-input"
         ref={inputRef}
         type="search"
         className="rounded-tl rounded-bl bg-violet-50 px-2.5 w-32"
@@ -23,6 +24,7 @@ const SearchBar = () => {
         onKeyDown={(event) => event.key === "Enter" && handleSearch()}
       />
       <button
+        data-testid="search-button"
         onClick={handleSearch}
         className=" rounded-tr rounded-br  bg-slate-200 px-2 text-sm font-medium hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 items-center"
       >
