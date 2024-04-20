@@ -73,6 +73,7 @@ const CreateModal = (props: Props) => {
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3">
                 <button
+                  data-testid="close-button"
                   onClick={closeModal}
                   className="absolute right-3 top-3 p-1.5 rounded-full bg-slate-50 hover:bg-slate-200 transition-all"
                 >
@@ -97,6 +98,7 @@ const CreateModal = (props: Props) => {
                     )}
                   </div>
                   <input
+                    data-testid="title-input"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     maxLength={25}
@@ -117,6 +119,7 @@ const CreateModal = (props: Props) => {
                     )}
                   </div>
                   <textarea
+                    data-testid="description-input"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     maxLength={150}
@@ -165,6 +168,7 @@ const CreateModal = (props: Props) => {
                 </div>
                 <div className="h-0.5 bg-gray-200 mt-4" />
                 <button
+                  data-testid="create-button"
                   disabled={title.length < 5 || description.length < 5}
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
