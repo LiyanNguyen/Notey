@@ -1,11 +1,20 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Dispatch, Fragment, SetStateAction, memo, useRef } from "react";
+import {
+  Dispatch,
+  Fragment,
+  SetStateAction,
+  memo,
+  useRef,
+  useState,
+} from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Note } from "../types/Note";
 import { colorOptions, ratingOptions } from "../data";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Spinner } from ".";
 import { PATCH_Note } from "../api";
+import { CheckIcon } from "@heroicons/react/20/solid";
+import formatDate from "../utils/formatDate";
 
 type Props = {
   data: Note;
@@ -17,35 +26,34 @@ const NoteModal = memo((props: Props) => {
   const { data, isOpen, setIsOpen } = props;
   const titleInputRef = useRef<HTMLInputElement>(null);
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
-  const colorDropdownRef = useRef<HTMLSelectElement>(null);
-  const ratingDropdownRef = useRef<HTMLSelectElement>(null);
   const queryClient = useQueryClient();
 
+  const [color, setColor] = useState<string>(data.color);
+  const [rating, setRating] = useState<number>(data.rating);
+
   // FUNCTIONS
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => {
+    setIsOpen(false);
+    setColor(data.color);
+  };
   const refetchNotes = () =>
     queryClient.invalidateQueries({ queryKey: ["Notes"] });
 
   // HTTP PATCH
   const { mutate: PATCHMutate, isLoading: PATCHLoading } = useMutation({
     mutationFn: async () => {
-      if (
-        titleInputRef.current &&
-        descriptionInputRef.current &&
-        colorDropdownRef.current &&
-        ratingDropdownRef.current
-      )
+      if (titleInputRef.current && descriptionInputRef.current)
         return PATCH_Note(
           data._id,
           titleInputRef.current.value,
           descriptionInputRef.current.value,
-          colorDropdownRef.current.value,
-          parseInt(ratingDropdownRef.current.value)
+          color,
+          rating
         );
     },
     onSuccess: () => {
       refetchNotes();
-      closeModal();
+      setIsOpen(false);
     },
   });
 
@@ -75,7 +83,9 @@ const NoteModal = memo((props: Props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3">
+              <Dialog.Panel
+                className={`w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3 border-t-${color}-400 border-t-8 transition-all`}
+              >
                 <button
                   onClick={closeModal}
                   className="absolute right-3 top-3 p-1.5 rounded-full bg-slate-50 hover:bg-slate-200 transition-all"
@@ -83,33 +93,16 @@ const NoteModal = memo((props: Props) => {
                   <span className="hidden">Close</span>
                   <XMarkIcon className="h-5 w-5 text-gray-500" />
                 </button>
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium text-center"
-                >
-                  Edit Note
-                </Dialog.Title>
+                <input
+                  data-testid="title-input"
+                  ref={titleInputRef}
+                  maxLength={25}
+                  defaultValue={data.title}
+                  id="title"
+                  type="text"
+                  className="w-[300px] self-center text-center text-lg rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 cursor-pointer bg-inherit"
+                />
                 <div>
-                  <label htmlFor="title" className="text-slate-500 text-sm">
-                    Title
-                  </label>
-                  <input
-                    data-testid="title-input"
-                    ref={titleInputRef}
-                    maxLength={25}
-                    defaultValue={data.title}
-                    id="title"
-                    type="text"
-                    className="w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="description"
-                    className="text-slate-500 text-sm"
-                  >
-                    Description
-                  </label>
                   <textarea
                     data-testid="description-input"
                     ref={descriptionInputRef}
@@ -117,48 +110,45 @@ const NoteModal = memo((props: Props) => {
                     defaultValue={data.description}
                     id="description"
                     rows={4}
-                    className="w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none"
+                    className="w-full rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none bg-inherit cursor-pointer"
                   />
                 </div>
-                <div className="flex gap-5">
-                  <div className="flex flex-col w-full">
-                    <label htmlFor="color" className="text-slate-500 text-sm">
-                      Color
-                    </label>
-                    <select
-                      ref={colorDropdownRef}
-                      defaultValue={data.color}
-                      name="color"
-                      id="color"
-                      className="w-full rounded border p-1.5 bg-transparent border-slate-400 rounded-sm-within:outline-2 focus-within:outline-violet-500 capitalize"
+                <div className="flex justify-center gap-4 md:justify-between">
+                  {colorOptions.slice(1).map((item) => (
+                    <button
+                      onClick={() => setColor(item)}
+                      className={`w-12 md:w-16 h-8 bg-${item}-400 rounded items-center justify-center flex hover:scale-105 transition-all`}
+                      key={item}
                     >
-                      {colorOptions.map((item) => (
-                        <option className="capitalize" key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="flex flex-col w-full">
-                    <label htmlFor="rating" className="text-slate-500 text-sm">
-                      Rating
-                    </label>
-                    <select
-                      ref={ratingDropdownRef}
-                      defaultValue={data.rating}
-                      name="rating"
-                      id="rating"
-                      className="w-full rounded border p-1.5 bg-transparent border-slate-400 rounded-sm-within:outline-2 focus-within:outline-violet-500 capitalize"
-                    >
-                      {ratingOptions.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                      {color === item && (
+                        <CheckIcon className="w-5 h-5 text-black font-bold" />
+                      )}
+                    </button>
+                  ))}
                 </div>
-                <div className="h-0.5 bg-gray-200 mt-4" />
+                <div className="flex justify-between w-full my-2">
+                  {ratingOptions.map((num) => (
+                    <button
+                      onClick={() => setRating(num)}
+                      key={num}
+                      className={` transition-all text-slate-500 text-center flex-1 border border-slate-200 ${
+                        num === rating &&
+                        "bg-violet-100 text-black font-semibold"
+                      } hover:bg-violet-100 hover:text-black hover:font-semibold`}
+                    >
+                      {num}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-xs text-slate-500">
+                    {formatDate(new Date(data.createdAt))}
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    {data.updatedAt && formatDate(new Date(data.updatedAt))}
+                  </p>
+                </div>
+                <div className="h-0.5 bg-gray-200" />
                 <button
                   disabled={
                     titleInputRef.current?.value === "" ||
