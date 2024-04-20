@@ -26,6 +26,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
       aria-label="Pagination"
     >
       <button
+        data-testid="first-button"
         onClick={firstPage}
         className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
       >
@@ -45,6 +46,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
         </svg>
       </button>
       <button
+        data-testid="previous-button"
         onClick={previousPage}
         className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
       >
@@ -64,11 +66,15 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
           />
         </svg>
       </button>
-      <p className="relative inline-flex items-center text-slate-500 px-4 py-2 text-sm font-semibold focus:z-20 focus:outline-offset-0 ring-1 ring-inset ring-gray-300 focus:outline-violet-500">
+      <p
+        data-testid="page-display"
+        className="relative inline-flex items-center text-slate-500 px-4 py-2 text-sm font-semibold focus:z-20 focus:outline-offset-0 ring-1 ring-inset ring-gray-300 focus:outline-violet-500"
+      >
         {page} / {totalPages}
       </p>
 
       <button
+        data-testid="next-button"
         onClick={nextPage}
         className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
       >
@@ -88,6 +94,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
         </svg>
       </button>
       <button
+        data-testid="last-button"
         onClick={lastPage}
         className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
       >
