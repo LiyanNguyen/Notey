@@ -9,11 +9,10 @@ import {
 } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Note } from "../types/Note";
-import { colorOptions, ratingOptions } from "../data";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Spinner } from ".";
+import { ColorOptions, RatingOptions, Spinner } from ".";
 import { PATCH_Note } from "../api";
-import { CheckIcon } from "@heroicons/react/20/solid";
+
 import formatDate from "../utils/formatDate";
 
 type Props = {
@@ -35,6 +34,7 @@ const NoteModal = memo((props: Props) => {
   const closeModal = () => {
     setIsOpen(false);
     setColor(data.color);
+    setRating(data.rating);
   };
   const refetchNotes = () =>
     queryClient.invalidateQueries({ queryKey: ["Notes"] });
@@ -113,33 +113,8 @@ const NoteModal = memo((props: Props) => {
                     className="w-full rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none bg-inherit cursor-pointer"
                   />
                 </div>
-                <div className="flex justify-center gap-4 md:justify-between">
-                  {colorOptions.slice(1).map((item) => (
-                    <button
-                      onClick={() => setColor(item)}
-                      className={`w-12 md:w-16 h-8 bg-${item}-400 rounded items-center justify-center flex hover:scale-105 transition-all`}
-                      key={item}
-                    >
-                      {color === item && (
-                        <CheckIcon className="w-5 h-5 text-black font-bold" />
-                      )}
-                    </button>
-                  ))}
-                </div>
-                <div className="flex justify-between w-full my-2">
-                  {ratingOptions.map((num) => (
-                    <button
-                      onClick={() => setRating(num)}
-                      key={num}
-                      className={` transition-all text-slate-500 text-center flex-1 border border-slate-200 ${
-                        num === rating &&
-                        "bg-violet-100 text-black font-semibold"
-                      } hover:bg-violet-100 hover:text-black hover:font-semibold`}
-                    >
-                      {num}
-                    </button>
-                  ))}
-                </div>
+                <ColorOptions color={color} setColor={setColor} />
+                <RatingOptions rating={rating} setRating={setRating} />
                 <div className="flex justify-between">
                   <p className="text-xs text-slate-500">
                     {formatDate(new Date(data.createdAt))}

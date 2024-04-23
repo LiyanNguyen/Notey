@@ -10,6 +10,8 @@ import Dropdown from "./Dropdown";
 import CreateModal from "./CreateModal";
 import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
+import ColorOptions from "./ColorOptions";
+import RatingOptions from "./RatingOptions";
 
 export {
   CreateModal,
@@ -24,4 +26,6 @@ export {
   Dropdown,
   SearchBar,
   Pagination,
+  ColorOptions,
+  RatingOptions,
 };
