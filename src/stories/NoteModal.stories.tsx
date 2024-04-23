@@ -11,7 +11,8 @@ const sampleData: Note = {
   description: "Sample Description",
   rating: 8,
   color: "green",
-  createdAt: "16-07-2023",
+  createdAt: new Date(),
+  updatedAt: new Date()
 };
 
 const meta = {

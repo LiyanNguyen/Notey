@@ -18,7 +18,7 @@ const ratingColorOptions = [
 ]
 
 const meta = {
-  title: 'Components/NoteCardContent',
+  title: 'Components/NoteCard',
   component: NoteCardContent,
   // tags: ['autodocs'],
   argTypes: {

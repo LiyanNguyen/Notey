@@ -27,7 +27,7 @@ const NoteCardContent = memo((props: Props) => {
   return (
     <fieldset
       role="group"
-      className={`bg-white border border-violet-100 shadow-md ${borderColor} border-t-2`}
+      className={`bg-white border border-violet-100 shadow-md ${borderColor} border-t-2 max-w-max`}
     >
       <div className="flex flex-col gap-2 p-4 pt-2 min-w-[320px] max-w-xs h-36 justify-between">
         <div className="flex justify-between items-center">

@@ -15,10 +15,10 @@ describe('NoteCard', () => {
       description: 'Sample Description',
       rating: 8,
       color: 'blue',
-      createdAt: '16-07-2023',
+      createdAt: new Date(),
     }
 
-    const dateDisplay = formatDate(new Date('16-07-2023'))
+    const dateDisplay = formatDate(sampleData.createdAt);
 
     render(
       <QueryClientProvider client={queryClient} >
@@ -44,7 +44,7 @@ describe('NoteCard', () => {
       description: 'Sample Description',
       rating: 8,
       color: 'blue',
-      createdAt: '16-07-2023',
+      createdAt: new Date(),
     }
 
     render(
@@ -67,7 +67,7 @@ describe('NoteCard', () => {
       description: 'Sample Description',
       rating: 8,
       color: 'red',
-      createdAt: '16-07-2023',
+      createdAt: new Date(),
     }
 
     render(
@@ -90,7 +90,7 @@ describe('NoteCard', () => {
       description: 'Sample Description',
       rating: 8,
       color: 'yellow',
-      createdAt: '16-07-2023',
+      createdAt: new Date(),
     }
 
     render(
@@ -113,7 +113,7 @@ describe('NoteCard', () => {
       description: 'Sample Description',
       rating: 8,
       color: 'green',
-      createdAt: '16-07-2023',
+      createdAt: new Date(),
     }
 
     render(
@@ -136,7 +136,7 @@ describe('NoteCard', () => {
       description: 'Sample Description',
       rating: 8,
       color: 'slate',
-      createdAt: '16-07-2023',
+      createdAt: new Date(),
     }
 
     render(

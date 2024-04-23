@@ -3,7 +3,7 @@ import { NavbarContent } from '../components'
 import { RecoilRoot } from 'recoil'
 
 const meta = {
-  title: 'Components/NavbarContent',
+  title: 'Components/Navbar',
   component: NavbarContent,
   decorators: [
     (Story) => (

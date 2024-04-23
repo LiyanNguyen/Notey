@@ -12,7 +12,7 @@ export const fakeArray: Note[] = [
     description: faker.commerce.productDescription(),
     rating: 7,
     color: 'blue',
-    createdAt: 'string',
+    createdAt: new Date(),
   },
   {
     _id: uuidv4(),
@@ -20,7 +20,7 @@ export const fakeArray: Note[] = [
     description: faker.commerce.productDescription(),
     rating: 6,
     color: 'red',
-    createdAt: 'string',
+    createdAt: new Date(),
   },
   {
     _id: uuidv4(),
@@ -28,7 +28,7 @@ export const fakeArray: Note[] = [
     description: faker.commerce.productDescription(),
     rating: 8,
     color: 'yellow',
-    createdAt: 'string',
+    createdAt: new Date(),
   },
   {
     _id: uuidv4(),
@@ -36,7 +36,7 @@ export const fakeArray: Note[] = [
     description: faker.commerce.productDescription(),
     rating: 5,
     color: 'green',
-    createdAt: 'string',
+    createdAt: new Date(),
   },
   {
     _id: uuidv4(),
@@ -44,7 +44,7 @@ export const fakeArray: Note[] = [
     description: faker.commerce.productDescription(),
     rating: 4,
     color: 'slate',
-    createdAt: 'string',
+    createdAt: new Date(),
   },
 ]
 

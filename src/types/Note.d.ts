@@ -4,6 +4,6 @@ export type Note = {
   description: string;
   rating: number;
   color: "blue" | "red" | "yellow" | "green" | "slate";
-  createdAt: string;
-  updatedAt?: string;
+  createdAt: Date;
+  updatedAt?: Date;
 };
