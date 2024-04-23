@@ -1,12 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  Dispatch,
-  Fragment,
-  SetStateAction,
-  memo,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, Fragment, SetStateAction, memo, useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Note } from "../types/Note";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -23,33 +16,37 @@ type Props = {
 
 const NoteModal = memo((props: Props) => {
   const { data, isOpen, setIsOpen } = props;
-  const titleInputRef = useRef<HTMLInputElement>(null);
-  const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
   const queryClient = useQueryClient();
 
+  const [title, setTitle] = useState<string>(data.title);
+  const [description, setDescription] = useState<string>(data.description);
   const [color, setColor] = useState<string>(data.color);
   const [rating, setRating] = useState<number>(data.rating);
 
   // FUNCTIONS
   const closeModal = () => {
     setIsOpen(false);
+    setTitle(data.title);
+    setDescription(data.description);
     setColor(data.color);
     setRating(data.rating);
   };
   const refetchNotes = () =>
     queryClient.invalidateQueries({ queryKey: ["Notes"] });
 
+  const isUpdateDisabled = () => {
+    return (
+      title === data.title &&
+      description === data.description &&
+      color === data.color &&
+      rating === data.rating
+    );
+  };
+
   // HTTP PATCH
   const { mutate: PATCHMutate, isLoading: PATCHLoading } = useMutation({
     mutationFn: async () => {
-      if (titleInputRef.current && descriptionInputRef.current)
-        return PATCH_Note(
-          data._id,
-          titleInputRef.current.value,
-          descriptionInputRef.current.value,
-          color,
-          rating
-        );
+      return PATCH_Note(data._id, title, description, color, rating);
     },
     onSuccess: () => {
       refetchNotes();
@@ -95,9 +92,9 @@ const NoteModal = memo((props: Props) => {
                 </button>
                 <input
                   data-testid="title-input"
-                  ref={titleInputRef}
                   maxLength={25}
-                  defaultValue={data.title}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   id="title"
                   type="text"
                   className="w-[300px] self-center text-center text-lg rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 cursor-pointer bg-inherit"
@@ -105,9 +102,9 @@ const NoteModal = memo((props: Props) => {
                 <div>
                   <textarea
                     data-testid="description-input"
-                    ref={descriptionInputRef}
                     maxLength={150}
-                    defaultValue={data.description}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     id="description"
                     rows={4}
                     className="w-full rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none bg-inherit cursor-pointer"
@@ -125,10 +122,7 @@ const NoteModal = memo((props: Props) => {
                 </div>
                 <div className="h-0.5 bg-gray-200" />
                 <button
-                  disabled={
-                    titleInputRef.current?.value === "" ||
-                    descriptionInputRef.current?.value === ""
-                  }
+                  disabled={isUpdateDisabled()}
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
                   onClick={() => PATCHMutate()}
