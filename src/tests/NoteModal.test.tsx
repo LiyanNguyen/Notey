@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { NoteModal } from "../components";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -13,7 +13,8 @@ const sampleData: Note = {
   description: "Sample Description",
   rating: 8,
   color: "green",
-  createdAt: "16-07-2023",
+  createdAt: new Date(),
+  updatedAt: new Date()
 };
 
 describe("NoteModal", () => {
@@ -41,14 +42,27 @@ describe("NoteModal", () => {
 
     const updateButton = await screen.findByRole("button", { name: "Update" });
     expect(updateButton).toBeInTheDocument();
+    expect(updateButton).toBeDisabled()
+
+    const titleInput = screen.getByTestId("title-input");
+    fireEvent.change(titleInput, { target: { value: "new sample title" } });
+    expect(titleInput).toHaveValue("new sample title");
+
+    const descriptionInput = screen.getByTestId("description-input");
+    fireEvent.change(descriptionInput, {
+      target: { value: "new sample descripition" },
+    });
+    expect(descriptionInput).toHaveValue("new sample descripition");
+
+    expect(updateButton).toBeEnabled();
 
     await userEvent.click(updateButton);
 
     const XButton = await screen.findByRole("button", { name: "Close" });
+    expect(XButton).toBeInTheDocument();
 
     await userEvent.click(XButton);
 
-    expect(XButton).toBeInTheDocument();
-    expect(setIsOpen).toHaveBeenCalledTimes(1);
+    expect(setIsOpen).toHaveBeenCalledTimes(2);
   });
 });

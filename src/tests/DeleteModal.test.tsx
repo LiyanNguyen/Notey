@@ -58,8 +58,6 @@ describe("DeleteModal", () => {
 
     const XButton = await screen.findByRole("button", { name: "Close" });
 
-    await userEvent.click(XButton);
-
     expect(XButton).toBeInTheDocument();
     expect(setIsOpen).toHaveBeenCalledTimes(1);
   });

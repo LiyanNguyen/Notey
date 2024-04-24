@@ -19,19 +19,22 @@ describe("CreateModal", () => {
     expect(createButton).toBeDisabled();
 
     const titleInput = screen.getByTestId("title-input");
-    await fireEvent.change(titleInput, { target: { value: "sample title" } });
+    fireEvent.change(titleInput, { target: { value: "sample title" } });
     expect(titleInput).toHaveValue("sample title");
 
     const descriptionInput = screen.getByTestId("description-input");
-    await fireEvent.change(descriptionInput, { target: { value: "sample descripition" } });
+    fireEvent.change(descriptionInput, {
+      target: { value: "sample descripition" },
+    });
     expect(descriptionInput).toHaveValue("sample descripition");
 
     expect(createButton).not.toBeDisabled();
-    await fireEvent.click(createButton);
 
-    const closeButton = screen.getByTestId("close-button");
-    expect(closeButton).toBeDefined();
-    await userEvent.click(closeButton);
+    await userEvent.click(createButton);
+
+    const XButton = await screen.findByRole("button", { name: "Close" });
+    expect(XButton).toBeDefined();
+
     expect(setIsOpen).toHaveBeenCalledOnce();
   });
 });

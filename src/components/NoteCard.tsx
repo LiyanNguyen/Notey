@@ -16,7 +16,7 @@ const NoteCard = (props: Props) => {
   const [ratingColor, setRatingColor] = useState<string>('')
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [isDeleting, setIsDeleting] = useState<boolean>(false)
-  const createdDate = formatDate(new Date(createdAt))
+  const createdDate = formatDate(createdAt)
 
   // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
   useEffect(() => {
