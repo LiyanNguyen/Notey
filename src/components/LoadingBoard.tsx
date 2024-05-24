@@ -13,17 +13,17 @@ const LoadingBoard = () => {
   }, [loadingDuration]);
 
   return (
-    <div className="w-full h-96 flex flex-col gap-4 items-center justify-center">
+    <div className="w-full h-96 flex flex-col gap-4 items-center justify-center text-slate-500 dark:text-slate-300">
       <Spinner className="h-12 w-12 border-[6px]" />
       {loadingDuration > 1000 ? (
         <>
-          <p className="text-slate-500">
+          <p>
             This project uses free hosting service
           </p>
-          <p className="text-slate-500">This might take a while...</p>
+          <p>This might take a while...</p>
         </>
       ) : (
-        <p className="text-slate-500">Loading Notes...</p>
+        <p>Loading Notes...</p>
       )}
     </div>
   );

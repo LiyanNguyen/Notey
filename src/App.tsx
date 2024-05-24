@@ -1,8 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Board, Navbar } from './layouts'
-import { RecoilRoot } from 'recoil'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Board, Navbar } from "./layouts";
+import { RecoilRoot } from "recoil";
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
@@ -12,7 +12,7 @@ const App = () => {
         <Board />
       </RecoilRoot>
     </QueryClientProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

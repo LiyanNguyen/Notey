@@ -19,14 +19,14 @@ const SearchBar = () => {
         data-testid="search-input"
         ref={inputRef}
         type="search"
-        className="rounded-tl rounded-bl bg-violet-50 px-2.5 w-32"
+        className="rounded-tl rounded-bl bg-violet-50 px-2.5 w-36 dark:bg-slate-800 dark:text-slate-200 focus-within:outline-violet-500"
         placeholder="Search..."
         onKeyDown={(event) => event.key === "Enter" && handleSearch()}
       />
       <button
         data-testid="search-button"
         onClick={handleSearch}
-        className=" rounded-tr rounded-br  bg-slate-200 px-2 text-sm font-medium hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 items-center"
+        className=" rounded-tr rounded-br bg-slate-200 px-2 text-sm font-medium hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 items-center"
       >
         <MagnifyingGlassIcon className="h-5 w-5 text-slate-500" />
       </button>

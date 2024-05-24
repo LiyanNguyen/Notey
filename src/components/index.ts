@@ -12,6 +12,7 @@ import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
 import ColorOptions from "./ColorOptions";
 import RatingOptions from "./RatingOptions";
+import ThemeToggler from "./ThemeToggler";
 
 export {
   CreateModal,
@@ -28,4 +29,5 @@ export {
   Pagination,
   ColorOptions,
   RatingOptions,
+  ThemeToggler,
 };

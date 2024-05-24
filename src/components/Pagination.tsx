@@ -22,17 +22,17 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
 
   return (
     <nav
-      className="flex py-2 self-center absolute bottom-0 bg-violet-50 w-full justify-center "
+      className="flex dark:bg-slate-900 py-2 self-center absolute bottom-0 bg-violet-50 w-full justify-center "
       aria-label="Pagination"
     >
       <button
         data-testid="first-button"
         onClick={firstPage}
-        className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
+        className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:ring-slate-500 dark:hover:bg-slate-950 focus:z-20 focus:outline-offset-0"
       >
         <span className="sr-only">First</span>
         <svg
-          className="h-4 w-4 text-slate-500"
+          className="h-4 w-4 text-slate-500 dark:text-slate-200"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -48,12 +48,12 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
       <button
         data-testid="previous-button"
         onClick={previousPage}
-        className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
+        className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 dark:bg-slate-800 dark:ring-slate-500 dark:hover:bg-slate-950"
       >
         <span className="sr-only">Previous</span>
 
         <svg
-          className="h-4 w-4 text-slate-500"
+          className="h-4 w-4 text-slate-500 dark:text-slate-200"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -68,7 +68,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
       </button>
       <p
         data-testid="page-display"
-        className="relative inline-flex items-center text-slate-500 px-4 py-2 text-sm font-semibold focus:z-20 focus:outline-offset-0 ring-1 ring-inset ring-gray-300 focus:outline-violet-500"
+        className="relative inline-flex items-center text-slate-500 px-4 py-2 text-sm font-semibold focus:z-20 focus:outline-offset-0 ring-1 ring-inset ring-gray-300 focus:outline-violet-500 dark:bg-slate-800 dark:ring-slate-500 dark:text-slate-200"
       >
         {page} / {totalPages}
       </p>
@@ -76,11 +76,11 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
       <button
         data-testid="next-button"
         onClick={nextPage}
-        className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
+        className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 dark:bg-slate-800 dark:ring-slate-500 dark:hover:bg-slate-950"
       >
         <span className="sr-only">Next</span>
         <svg
-          className="h-4 w-4 text-slate-500"
+          className="h-4 w-4 text-slate-500 dark:text-slate-200"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -96,11 +96,11 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
       <button
         data-testid="last-button"
         onClick={lastPage}
-        className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 transition-all"
+        className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 dark:bg-slate-800 dark:ring-slate-500 dark:hover:bg-slate-950"
       >
         <span className="sr-only">Last</span>
         <svg
-          className="h-4 w-4 text-slate-500"
+          className="h-4 w-4 text-slate-500 dark:text-slate-200"
           width="24"
           height="24"
           viewBox="0 0 24 24"

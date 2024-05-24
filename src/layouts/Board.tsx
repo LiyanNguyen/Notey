@@ -1,5 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { EmptyBoard, ErrorBoard, LoadingBoard, NoteCard, Pagination } from "../components";
+import {
+  EmptyBoard,
+  ErrorBoard,
+  LoadingBoard,
+  NoteCard,
+  Pagination,
+} from "../components";
 import { useRecoilState } from "recoil";
 import { ratingState, colorState, searchString, currentPage } from "../global";
 import { Note } from "../types/Note";
@@ -21,7 +27,7 @@ const Board = () => {
   });
 
   return (
-    <div className="bg-violet-50 h-[calc(100vh)] overflow-auto flex flex-col justify-between">
+    <div className="bg-violet-50 dark:bg-slate-900 h-[calc(100vh)] overflow-auto flex flex-col justify-between">
       <div className="pt-24 pb-16 px-8 flex flex-wrap gap-5 justify-center">
         {isLoading && <LoadingBoard />}
         {isError && <ErrorBoard />}

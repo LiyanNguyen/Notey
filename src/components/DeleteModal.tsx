@@ -58,23 +58,23 @@ const DeleteModal = memo((props: Props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3 dark:bg-slate-800">
                 <button
                   onClick={closeModal}
-                  className="absolute right-3 top-3 p-1.5 rounded-full bg-slate-50 hover:bg-slate-200 transition-all"
+                  className="absolute right-3 top-3 p-1.5 rounded-full bg-slate-50 hover:bg-slate-200 transition-all dark:bg-slate-600 dark:hover:bg-slate-700"
                 >
                   <span className="hidden">Close</span>
-                  <XMarkIcon className="h-5 w-5 text-gray-500" />
+                  <XMarkIcon className="h-5 w-5 text-gray-500 dark:text-white" />
                 </button>
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium text-center"
+                  className="text-lg font-medium text-center dark:text-slate-200"
                 >
                   Delete Confirmation
                 </Dialog.Title>
-                <p className="text-slate-500">
+                <p className="text-slate-500 dark:text-slate-400">
                   Are you sure you want to delete{" "}
-                  <span className="text-black font-medium">{title}</span>
+                  <span className="text-black font-medium dark:text-slate-200">{title}</span>
                   {""}? this action cannot be undone.
                 </p>
                 <div className="flex self-center gap-4">

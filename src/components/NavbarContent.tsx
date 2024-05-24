@@ -1,7 +1,7 @@
 import { memo } from "react";
 import icon from "../assets/icon.png";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Dropdown, SearchBar } from ".";
+import { Dropdown, SearchBar, ThemeToggler } from ".";
 import { useRecoilState } from "recoil";
 import { colorState, ratingState } from "../global";
 import { colorOptions } from "../data";
@@ -25,6 +25,7 @@ const NavbarContent = memo(({ openModal }: { openModal: () => void }) => {
             onChange={setRating}
             options={["ascending", "descending"]}
           />
+          <ThemeToggler />
         </div>
         <button
           data-testid="new-note-button"

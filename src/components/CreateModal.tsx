@@ -64,24 +64,27 @@ const CreateModal = (props: Props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3 dark:bg-slate-800">
                 <button
                   data-testid="close-button"
                   onClick={closeModal}
-                  className="absolute right-3 top-3 p-1.5 rounded-full bg-slate-50 hover:bg-slate-200 transition-all"
+                  className="absolute right-3 top-3 p-1.5 rounded-full bg-slate-50 hover:bg-slate-200 transition-all dark:bg-slate-600 dark:hover:bg-slate-700"
                 >
                   <span className="hidden">Close</span>
-                  <XMarkIcon className="h-5 w-5 text-gray-500" />
+                  <XMarkIcon className="h-5 w-5 text-gray-500 dark:text-white" />
                 </button>
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium text-center"
+                  className="text-lg font-medium text-center dark:text-slate-200"
                 >
                   Create New Note
                 </Dialog.Title>
                 <div>
                   <div className="flex flex-row items-center justify-between">
-                    <label htmlFor="title" className="text-slate-500 text-sm">
+                    <label
+                      htmlFor="title"
+                      className="text-slate-500 text-sm dark:text-slate-400"
+                    >
                       Title
                     </label>
                     {title.length >= 12 && (
@@ -97,12 +100,15 @@ const CreateModal = (props: Props) => {
                     maxLength={25}
                     id="title"
                     type="text"
-                    className="w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500"
+                    className="bg-inherit w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-violet-500 dark:text-slate-200"
                   />
                 </div>
                 <div>
                   <div className="flex flex-row items-center justify-between">
-                    <label htmlFor="title" className="text-slate-500 text-sm">
+                    <label
+                      htmlFor="title"
+                      className="text-slate-500 text-sm dark:text-slate-400"
+                    >
                       Description
                     </label>
                     {description.length >= 75 && (
@@ -118,16 +124,20 @@ const CreateModal = (props: Props) => {
                     maxLength={150}
                     id="description"
                     rows={4}
-                    className="w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none"
+                    className="bg-inherit w-full border border-slate-400 rounded-sm px-2 py-1 focus-within:outline-violet-500 resize-none dark:text-slate-300"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
                   <div>
-                    <p className="text-slate-500 text-sm mb-1">Color</p>
+                    <p className="text-slate-500 text-sm mb-1 dark:text-slate-400">
+                      Color
+                    </p>
                     <ColorOptions color={color} setColor={setColor} />
                   </div>
                   <div>
-                    <p className="text-slate-500 text-sm">Rating</p>
+                    <p className="text-slate-500 text-sm dark:text-slate-400">
+                      Rating
+                    </p>
                     <RatingOptions rating={rating} setRating={setRating} />
                   </div>
                 </div>
