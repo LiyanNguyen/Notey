@@ -19,3 +19,8 @@ export const currentPage = atom({
   key: "currentPage",
   default: 1,
 });
+
+export const searchInputRef = atom<HTMLInputElement | null>({
+  key: "searchInput",
+  default: null,
+});
