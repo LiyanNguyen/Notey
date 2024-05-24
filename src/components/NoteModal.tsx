@@ -81,7 +81,7 @@ const NoteModal = memo((props: Props) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className={`w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle transition-all flex flex-col gap-3 border-t-${color}-400 border-t-8 transition-all`}
+                className={`w-full max-w-md transform overflow-hidden rounded-md bg-white px-6 py-4 text-left align-middle flex flex-col gap-3 border-t-${color}-400 border-t-8 transition-all`}
               >
                 <button
                   onClick={closeModal}
@@ -97,7 +97,7 @@ const NoteModal = memo((props: Props) => {
                   onChange={(e) => setTitle(e.target.value)}
                   id="title"
                   type="text"
-                  className="w-[300px] self-center text-center text-lg rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 cursor-pointer bg-inherit"
+                  className="w-[300px] self-center text-center text-lg rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 cursor-pointer bg-inherit border border-transparent hover:border-violet-500 transition-colors duration-75"
                 />
                 <div>
                   <textarea
@@ -107,7 +107,7 @@ const NoteModal = memo((props: Props) => {
                     onChange={(e) => setDescription(e.target.value)}
                     id="description"
                     rows={4}
-                    className="w-full rounded-sm px-2 py-1 focus-within:outline-2 focus-within:outline-violet-500 resize-none bg-inherit cursor-pointer"
+                    className="w-full rounded-sm px-2 py-1 border border-transparent transition-colors duration-75 focus-within:outline-violet-500 resize-none bg-inherit cursor-pointer hover:border-violet-500"
                   />
                 </div>
                 <ColorOptions color={color} setColor={setColor} />
