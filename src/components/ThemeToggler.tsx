@@ -16,13 +16,14 @@ const ThemeToggler = () => {
     <div className="hidden md:flex items-center gap-2 transition-colors duration-200 ease-in-out">
       <SunIcon className="h-5 w-5 text-slate-300" />
       <Switch
+        data-testid="switch"
         checked={enabled}
         onChange={setEnabled}
         className={`${
           enabled ? "bg-violet-600" : "bg-violet-400"
         } relative inline-flex h-[22px] w-11 items-center rounded-full`}
       >
-        <span className="sr-only">Enable notifications</span>
+        <span className="sr-only">Toggle Theme</span>
         <span
           className={`${
             enabled ? "translate-x-6" : "translate-x-1"
