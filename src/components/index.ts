@@ -13,6 +13,7 @@ import Pagination from "./Pagination";
 import ColorOptions from "./ColorOptions";
 import RatingOptions from "./RatingOptions";
 import ThemeToggler from "./ThemeToggler";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export {
   CreateModal,
@@ -30,4 +31,5 @@ export {
   ColorOptions,
   RatingOptions,
   ThemeToggler,
+  LanguageSwitcher,
 };
