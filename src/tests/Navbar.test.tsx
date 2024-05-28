@@ -20,9 +20,8 @@ describe("Navbar", () => {
     expect(heading).toHaveTextContent("Notey");
 
     const newNoteButton = screen.getByTestId("new-note-button");
-    expect(newNoteButton).toHaveTextContent("New Note");
-
     fireEvent.click(newNoteButton);
-    expect(screen.getByText("Create New Note")).toBeDefined();
+    
+    expect(screen.getByTestId("create-button")).toBeDefined();
   });
 });

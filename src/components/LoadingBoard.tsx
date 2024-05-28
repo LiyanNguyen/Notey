@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Spinner } from ".";
+import { useTranslation } from "react-i18next";
 
 const LoadingBoard = () => {
   const [loadingDuration, setLoadingDuration] = useState<number>(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setTimeout(() => {
@@ -17,13 +19,11 @@ const LoadingBoard = () => {
       <Spinner className="h-12 w-12 border-[6px]" />
       {loadingDuration > 1000 ? (
         <>
-          <p>
-            This project uses free hosting service
-          </p>
-          <p>This might take a while...</p>
+          <p>{t("freeHosting")}</p>
+          <p>{t("mightTakeAWhile")}</p>
         </>
       ) : (
-        <p>Loading Notes...</p>
+        <p>{t("loadingNotes")}</p>
       )}
     </div>
   );

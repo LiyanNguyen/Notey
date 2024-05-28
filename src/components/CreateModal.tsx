@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColorOptions, RatingOptions, Spinner } from ".";
 import { POST_Note } from "../api";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   isOpen: boolean;
@@ -17,6 +18,7 @@ const CreateModal = (props: Props) => {
   const [color, setColor] = useState<string>("blue");
   const [rating, setRating] = useState<number>(1);
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   // FUNCTIONS
   const closeModal = () => {
@@ -77,7 +79,7 @@ const CreateModal = (props: Props) => {
                   as="h3"
                   className="text-lg font-medium text-center dark:text-slate-200"
                 >
-                  Create New Note
+                  {t("createNewNote")}
                 </Dialog.Title>
                 <div>
                   <div className="flex flex-row items-center justify-between">
@@ -85,7 +87,7 @@ const CreateModal = (props: Props) => {
                       htmlFor="title"
                       className="text-slate-500 text-sm dark:text-slate-400"
                     >
-                      Title
+                      {t("title")}
                     </label>
                     {title.length >= 12 && (
                       <span className="text-slate-400 text-xs">
@@ -109,7 +111,7 @@ const CreateModal = (props: Props) => {
                       htmlFor="title"
                       className="text-slate-500 text-sm dark:text-slate-400"
                     >
-                      Description
+                      {t("description")}
                     </label>
                     {description.length >= 75 && (
                       <span className="text-slate-400 text-xs">
@@ -130,13 +132,13 @@ const CreateModal = (props: Props) => {
                 <div className="flex flex-col gap-2">
                   <div>
                     <p className="text-slate-500 text-sm mb-1 dark:text-slate-400">
-                      Color
+                      {t("color")}
                     </p>
                     <ColorOptions color={color} setColor={setColor} />
                   </div>
                   <div>
                     <p className="text-slate-500 text-sm dark:text-slate-400">
-                      Rating
+                      {t("rating")}
                     </p>
                     <RatingOptions rating={rating} setRating={setRating} />
                   </div>
@@ -152,7 +154,7 @@ const CreateModal = (props: Props) => {
                   {POSTLoading ? (
                     <Spinner className="h-6 w-6 border-[3px]" />
                   ) : (
-                    "Create"
+                    t("create")
                   )}
                 </button>
               </Dialog.Panel>

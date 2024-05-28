@@ -24,9 +24,7 @@ describe("NoteModal", () => {
         <NoteModal data={sampleData} isOpen setIsOpen={() => null} />
       </QueryClientProvider>
     );
-    const updateNoteButton = await screen.findByRole("button", {
-      name: "Update",
-    });
+    const updateNoteButton = await screen.findByTestId("update-button")
     
     expect(updateNoteButton).toBeInTheDocument();
   });
@@ -40,7 +38,7 @@ describe("NoteModal", () => {
       </QueryClientProvider>
     );
 
-    const updateButton = await screen.findByRole("button", { name: "Update" });
+    const updateButton = await screen.findByTestId("update-button");
     expect(updateButton).toBeInTheDocument();
     expect(updateButton).toBeDisabled()
 

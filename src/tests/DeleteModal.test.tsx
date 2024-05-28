@@ -24,10 +24,10 @@ describe("DeleteModal", () => {
 
     const headingElement = await screen.findByRole("heading", {
       level: 3,
-      name: "Delete Confirmation",
+      name: "deleteConfirmation",
     });
-    const deleteButton = await screen.findByRole("button", { name: "Delete" });
-    const cancelButton = await screen.findByRole("button", { name: "Cancel" });
+    const deleteButton = await screen.findByTestId("delete-button");
+    const cancelButton = await screen.findByTestId("cancel-button");
     const titleText = await screen.findByText("Sample Title");
 
     expect(headingElement).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe("DeleteModal", () => {
       { wrapper: RecoilRoot }
     );
 
-    const deleteButton = await screen.findByRole("button", { name: "Delete" });
+    const deleteButton = await screen.findByTestId("delete-button");
     expect(deleteButton).toBeInTheDocument();
 
     await userEvent.click(deleteButton);

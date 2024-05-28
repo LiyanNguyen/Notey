@@ -2,12 +2,14 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { useEffect, useRef } from "react";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { currentPage, searchString, searchInputRef } from "../global";
+import { useTranslation } from "react-i18next";
 
 const SearchBar = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [, setSearch] = useRecoilState(searchString);
   const resetPage = useResetRecoilState(currentPage);
   const [, setSearchInput] = useRecoilState(searchInputRef);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSearchInput(inputRef.current);
@@ -25,7 +27,7 @@ const SearchBar = () => {
         ref={inputRef}
         type="search"
         className="rounded-tl rounded-bl bg-violet-50 px-2.5 w-36 dark:bg-slate-800 dark:text-slate-200 focus-within:outline-violet-500"
-        placeholder="Search..."
+        placeholder={t("search")}
         onKeyDown={(event) => event.key === "Enter" && handleSearch()}
       />
       <button

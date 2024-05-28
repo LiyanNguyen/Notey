@@ -7,6 +7,7 @@ import { ColorOptions, RatingOptions, Spinner } from ".";
 import { PATCH_Note } from "../api";
 
 import formatDate from "../utils/formatDate";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   data: Note;
@@ -22,6 +23,7 @@ const NoteModal = memo((props: Props) => {
   const [description, setDescription] = useState<string>(data.description);
   const [color, setColor] = useState<string>(data.color);
   const [rating, setRating] = useState<number>(data.rating);
+  const { t } = useTranslation();
 
   // FUNCTIONS
   const closeModal = () => {
@@ -123,14 +125,14 @@ const NoteModal = memo((props: Props) => {
                 <div className="h-0.5 bg-gray-200" />
                 <button
                   disabled={isUpdateDisabled()}
-                  type="button"
+                  data-testid="update-button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
                   onClick={() => PATCHMutate()}
                 >
                   {PATCHLoading ? (
                     <Spinner className="h-6 w-6 border-[3px]" />
                   ) : (
-                    "Update"
+                    t("update")
                   )}
                 </button>
               </Dialog.Panel>
