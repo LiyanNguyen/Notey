@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, Fragment, memo } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Spinner } from ".";
 import { DELETE_Note } from "../api";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   id: string;
@@ -15,6 +16,7 @@ type Props = {
 const DeleteModal = memo((props: Props) => {
   const { id, title, isOpen, setIsOpen } = props;
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   // FUNCTIONS
   const closeModal = () => setIsOpen(false);
@@ -70,12 +72,15 @@ const DeleteModal = memo((props: Props) => {
                   as="h3"
                   className="text-lg font-medium text-center dark:text-slate-200"
                 >
-                  Delete Confirmation
+                  {t("deleteConfirmation")}
                 </Dialog.Title>
                 <p className="text-slate-500 dark:text-slate-400">
-                  Are you sure you want to delete{" "}
-                  <span className="text-black font-medium dark:text-slate-200">{title}</span>
-                  {""}? this action cannot be undone.
+                  {/* Are you sure you want to delete{" "} */}
+                  <span className="text-black font-medium dark:text-slate-200">
+                    {title}
+                  </span>
+                  {/* {""}? this action cannot be undone. */}
+                  {t("deleteMessage")}
                 </p>
                 <div className="flex self-center gap-4">
                   <button
@@ -86,7 +91,7 @@ const DeleteModal = memo((props: Props) => {
                     {isLoading ? (
                       <Spinner className="h-6 w-6 border-[3px]" />
                     ) : (
-                      "Delete"
+                      t("delete")
                     )}
                   </button>
                   <button
@@ -94,7 +99,7 @@ const DeleteModal = memo((props: Props) => {
                     type="button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-slate-200 px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 self-center w-28"
                   >
-                    Cancel
+                    {t("cancel")}
                   </button>
                 </div>
               </Dialog.Panel>

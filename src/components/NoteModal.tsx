@@ -7,6 +7,7 @@ import { ColorOptions, RatingOptions, Spinner } from ".";
 import { PATCH_Note } from "../api";
 
 import formatDate from "../utils/formatDate";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   data: Note;
@@ -22,6 +23,7 @@ const NoteModal = memo((props: Props) => {
   const [description, setDescription] = useState<string>(data.description);
   const [color, setColor] = useState<string>(data.color);
   const [rating, setRating] = useState<number>(data.rating);
+  const { t } = useTranslation();
 
   // FUNCTIONS
   const closeModal = () => {
@@ -130,7 +132,7 @@ const NoteModal = memo((props: Props) => {
                   {PATCHLoading ? (
                     <Spinner className="h-6 w-6 border-[3px]" />
                   ) : (
-                    "Update"
+                    t("update")
                   )}
                 </button>
               </Dialog.Panel>

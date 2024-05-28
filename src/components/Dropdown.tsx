@@ -3,6 +3,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { SetterOrUpdater, useResetRecoilState } from "recoil";
 import { currentPage } from "../global";
+import { useTranslation } from "react-i18next";
 
 const Dropdown = ({
   value,
@@ -14,7 +15,8 @@ const Dropdown = ({
   options: string[];
   }) => {
   const resetPage = useResetRecoilState(currentPage);
-
+  const { t } = useTranslation();
+  
   return (
     <Listbox
       value={value}
@@ -25,7 +27,7 @@ const Dropdown = ({
     >
       <div className="relative">
         <Listbox.Button className="dark:bg-slate-800 w-36 rounded-sm-within:outline-2 p-0.5 rounded focus-within:outline-violet-500 capitalize relative cursor-default bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-violet-500 focus-visible:ring-1 focus-visible:ring-violet/25 focus-visible:ring-offset-2 focus-visible:ring-offset-violet-300 sm:text-sm">
-          <span className="block truncate dark:text-slate-200">{value}</span>
+          <span className="block truncate dark:text-slate-200">{t(value)}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon
               className="h-5 w-5 text-gray-400 dark:text-slate-200"
@@ -45,7 +47,9 @@ const Dropdown = ({
                 key={item}
                 className={({ active }) =>
                   `dark:text-slate-200 relative cursor-default select-none py-2 pl-10 pr-4 capitalize ${
-                    active ? "bg-violet-100 text-violet-900 dark:bg-slate-800" : "text-gray-900"
+                    active
+                      ? "bg-violet-100 text-violet-900 dark:bg-slate-800"
+                      : "text-gray-900"
                   }`
                 }
                 value={item}
@@ -57,7 +61,7 @@ const Dropdown = ({
                         selected ? "font-medium" : "font-normal"
                       }`}
                     >
-                      {item}
+                      {t(item)}
                     </span>
                     {selected ? (
                       <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-violet-600">
