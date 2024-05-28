@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { NoteModal } from "../components";
-import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Note } from "../types/Note";
 
@@ -54,12 +53,12 @@ describe("NoteModal", () => {
 
     expect(updateButton).toBeEnabled();
 
-    await userEvent.click(updateButton);
+    fireEvent.click(updateButton);
 
     const XButton = await screen.findByRole("button", { name: "Close" });
     expect(XButton).toBeInTheDocument();
 
-    await userEvent.click(XButton);
+    fireEvent.click(XButton);
 
     expect(setIsOpen).toHaveBeenCalledTimes(2);
   });

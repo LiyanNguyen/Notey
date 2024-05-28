@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { CreateModal } from "../components";
-import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -30,7 +29,7 @@ describe("CreateModal", () => {
 
     expect(createButton).not.toBeDisabled();
 
-    await userEvent.click(createButton);
+    fireEvent.click(createButton);
 
     const XButton = await screen.findByRole("button", { name: "Close" });
     expect(XButton).toBeDefined();

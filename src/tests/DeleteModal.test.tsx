@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { DeleteModal } from "../components";
-import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 
@@ -54,7 +53,7 @@ describe("DeleteModal", () => {
     const deleteButton = await screen.findByTestId("delete-button");
     expect(deleteButton).toBeInTheDocument();
 
-    await userEvent.click(deleteButton);
+    fireEvent.click(deleteButton);
 
     const XButton = await screen.findByRole("button", { name: "Close" });
 
