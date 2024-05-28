@@ -13,9 +13,7 @@ describe("EmptyBoard", () => {
       { wrapper: RecoilRoot }
     );
 
-    const noNotes = screen.getByText(
-      "No notes found with this search and filters..."
-    );
+    const noNotes = screen.getByText("noNotesFound");
     expect(noNotes).toBeInTheDocument();
 
     const searchInput = screen.getByTestId("search-input");
@@ -24,9 +22,7 @@ describe("EmptyBoard", () => {
     fireEvent.change(searchInput, { target: { value: "search string" } });
     expect(searchInput).toHaveValue("search string");
 
-    const resetFilterButton = screen.getByRole("button", {
-      name: "Reset Filters",
-    });
+    const resetFilterButton = screen.getByTestId("reset-button");
     expect(resetFilterButton).toBeInTheDocument();
 
     fireEvent.click(resetFilterButton);

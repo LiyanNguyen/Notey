@@ -86,6 +86,7 @@ const DeleteModal = memo((props: Props) => {
                   <button
                     onClick={() => mutateDeleteNote()}
                     type="button"
+                    data-testid="delete-button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 self-center w-28"
                   >
                     {isLoading ? (
@@ -97,6 +98,7 @@ const DeleteModal = memo((props: Props) => {
                   <button
                     onClick={closeModal}
                     type="button"
+                    data-testid="cancel-button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-slate-200 px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 self-center w-28"
                   >
                     {t("cancel")}

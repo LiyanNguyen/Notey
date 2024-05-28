@@ -6,7 +6,7 @@ describe("LoadingBoard", () => {
   it("renders corectly showing information", async () => {
     render(<LoadingBoard />);
 
-    const loadingNotes = screen.getByText("Loading Notes...");
+    const loadingNotes = screen.getByText("loadingNotes");
     await waitFor(() => {
       expect(loadingNotes).toBeInTheDocument();
     });
@@ -18,10 +18,8 @@ describe("LoadingBoard", () => {
       { timeout: 1500 }
     );
 
-    const longMessage1 = screen.getByText(
-      "This project uses free hosting service"
-    );
-    const longMessage2 = screen.getByText("This might take a while...");
+    const longMessage1 = screen.getByText("freeHosting");
+    const longMessage2 = screen.getByText("mightTakeAWhile");
     expect(longMessage1).toBeInTheDocument();
     expect(longMessage2).toBeInTheDocument();
   });

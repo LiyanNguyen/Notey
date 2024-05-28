@@ -125,7 +125,7 @@ const NoteModal = memo((props: Props) => {
                 <div className="h-0.5 bg-gray-200" />
                 <button
                   disabled={isUpdateDisabled()}
-                  type="button"
+                  data-testid="update-button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
                   onClick={() => PATCHMutate()}
                 >
