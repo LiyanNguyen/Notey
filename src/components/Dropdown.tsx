@@ -1,9 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { SetterOrUpdater, useResetRecoilState } from "recoil";
-import { currentPage } from "../global";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../store";
+import { updatePartial } from "../store/filterSlice";
 
 const Dropdown = ({
   value,
@@ -11,20 +11,19 @@ const Dropdown = ({
   options,
 }: {
   value: string;
-  onChange: SetterOrUpdater<string> | (() => void);
+  onChange: (value: string) => void;
   options: string[];
-  }) => {
-  const resetPage = useResetRecoilState(currentPage);
-  const { t } = useTranslation();
+}) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(updatePartial({ currentPage: 1 }));
+  }, [value, dispatch]);
   
+  const { t } = useTranslation();
+
   return (
-    <Listbox
-      value={value}
-      onChange={(value) => {
-        resetPage();
-        onChange(value);
-      }}
-    >
+    <Listbox value={value} onChange={onChange}>
       <div className="relative">
         <Listbox.Button className="dark:bg-slate-800 w-36 rounded-sm-within:outline-2 p-0.5 rounded focus-within:outline-violet-500 capitalize relative cursor-default bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-violet-500 focus-visible:ring-1 focus-visible:ring-violet/25 focus-visible:ring-offset-2 focus-visible:ring-offset-violet-300 sm:text-sm">
           <span className="block truncate dark:text-slate-200">{t(value)}</span>

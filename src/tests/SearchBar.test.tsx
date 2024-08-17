@@ -1,11 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { SearchBar } from "../components";
-import { RecoilRoot } from "recoil";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 describe("SearchBar", () => {
   it("allows user to input search string for lookup", async () => {
-    render(<SearchBar />, { wrapper: RecoilRoot });
+    render(
+      <Provider store={store}>
+        <SearchBar />
+      </Provider>
+    );
 
     const searchInput = screen.getByTestId("search-input");
     expect(searchInput).toBeDefined();

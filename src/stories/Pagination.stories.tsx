@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Pagination } from "../components";
-import { RecoilRoot } from "recoil";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 const meta = {
   title: "Components/Pagination",
   component: Pagination,
   decorators: [
     (Story) => (
-      <RecoilRoot>
+      <Provider store={store}>
         <Story />
-      </RecoilRoot>
+      </Provider>
     ),
   ],
   // tags: ['autodocs'],

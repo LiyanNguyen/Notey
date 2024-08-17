@@ -1,5 +1,6 @@
 export const colorOptions = ["all", "blue", "red", "yellow", "green", "slate"];
 export const ratingOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+export const ratingState = ["ascending", "descending"];
 export const languages = [
   { name: "English", code: "en" },
   { name: "日本語", code: "jp" },

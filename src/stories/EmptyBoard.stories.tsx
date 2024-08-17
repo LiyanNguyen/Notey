@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { EmptyBoard } from "../components";
-import { RecoilRoot } from "recoil";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 const meta = {
   title: "Components/EmptyBoard",
   component: EmptyBoard,
   decorators: [
     (Story) => (
-      <RecoilRoot>
+      <Provider store={store}>
         <Story />
-      </RecoilRoot>
+      </Provider>
     ),
   ],
   // tags: ['autodocs'],

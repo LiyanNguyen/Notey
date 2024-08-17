@@ -1,30 +1,32 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { useEffect, useRef } from "react";
-import { useRecoilState, useResetRecoilState } from "recoil";
-import { currentPage, searchString, searchInputRef } from "../global";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch, useAppSelector } from "../store";
+import { setSearchString, updatePartial } from "../store/filterSlice";
 
 const SearchBar = () => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const [, setSearch] = useRecoilState(searchString);
-  const resetPage = useResetRecoilState(currentPage);
-  const [, setSearchInput] = useRecoilState(searchInputRef);
+  const [value, setValue] = useState<string>("");
+  const search = useAppSelector((state) => state.filter.searchString);
+
   const { t } = useTranslation();
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    setSearchInput(inputRef.current);
-  }, [setSearchInput]);
+    if (search === "") setValue("");
+  }, [search]);
 
   const handleSearch = () => {
-    resetPage();
-    inputRef.current && setSearch(inputRef.current.value);
+    dispatch(updatePartial({ currentPage: 1 }));
+    dispatch(setSearchString(value));
   };
 
   return (
     <div className="flex shadow-md">
       <input
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         data-testid="search-input"
-        ref={inputRef}
         type="search"
         className="rounded-tl rounded-bl bg-violet-50 px-2.5 w-36 dark:bg-slate-800 dark:text-slate-200 focus-within:outline-violet-500"
         placeholder={t("search")}

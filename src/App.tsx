@@ -1,16 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Board, Navbar } from "./layouts";
-import { RecoilRoot } from "recoil";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 const queryClient = new QueryClient();
 
-const App = () => {
+const App = () => {  
   return (
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
+      <Provider store={store}>
         <Navbar />
         <Board />
-      </RecoilRoot>
+      </Provider>
     </QueryClientProvider>
   );
 };
