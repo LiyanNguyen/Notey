@@ -1,23 +1,17 @@
-import { useRecoilState } from "recoil";
-import { currentPage } from "../global";
+import { useAppDispatch, useAppSelector } from "../store";
+import { previousPage, nextPage, updatePartial } from "../store/filterSlice";
 
 const Pagination = ({ totalPages }: { totalPages: number }) => {
-  const [page, setPage] = useRecoilState(currentPage);
+  const dispatch = useAppDispatch();
+  const page = useAppSelector((state) => state.filter.currentPage);
 
   const firstPage = () => {
-    if (page !== 1) setPage(1);
+    if (page !== 1) dispatch(updatePartial({ currentPage: 1 }));
   };
 
   const lastPage = () => {
-    if (page !== totalPages) setPage(totalPages);
-  };
-
-  const previousPage = () => {
-    page > 1 && setPage((prev) => prev - 1);
-  };
-
-  const nextPage = () => {
-    page < totalPages && setPage((prev) => prev + 1);
+    if (page !== totalPages)
+      dispatch(updatePartial({ currentPage: totalPages }));
   };
 
   return (
@@ -47,7 +41,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
       </button>
       <button
         data-testid="previous-button"
-        onClick={previousPage}
+        onClick={() => page > 1 && dispatch(previousPage())}
         className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 dark:bg-slate-800 dark:ring-slate-500 dark:hover:bg-slate-950"
       >
         <span className="sr-only">Previous</span>
@@ -75,7 +69,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
 
       <button
         data-testid="next-button"
-        onClick={nextPage}
+        onClick={() => page < totalPages && dispatch(nextPage())}
         className="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 bg-slate-100 hover:bg-slate-200 focus:z-20 focus:outline-offset-0 dark:bg-slate-800 dark:ring-slate-500 dark:hover:bg-slate-950"
       >
         <span className="sr-only">Next</span>

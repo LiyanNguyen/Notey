@@ -1,23 +1,22 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { useEffect, useRef } from "react";
-import { useRecoilState, useResetRecoilState } from "recoil";
-import { currentPage, searchString, searchInputRef } from "../global";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../store";
+import { setSearchString, updatePartial } from "../store/filterSlice";
 
 const SearchBar = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [, setSearch] = useRecoilState(searchString);
-  const resetPage = useResetRecoilState(currentPage);
-  const [, setSearchInput] = useRecoilState(searchInputRef);
   const { t } = useTranslation();
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    setSearchInput(inputRef.current);
-  }, [setSearchInput]);
+    dispatch(updatePartial({ searchInput: inputRef.current }));
+  }, [dispatch]);
 
   const handleSearch = () => {
-    resetPage();
-    inputRef.current && setSearch(inputRef.current.value);
+    dispatch(updatePartial({ currentPage: 1 }));
+    inputRef.current && dispatch(setSearchString(inputRef.current.value));
   };
 
   return (

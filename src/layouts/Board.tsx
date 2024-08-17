@@ -6,16 +6,15 @@ import {
   NoteCard,
   Pagination,
 } from "../components";
-import { useRecoilState } from "recoil";
-import { ratingState, colorState, searchString, currentPage } from "../global";
 import { Note } from "../types/Note";
 import { GET_Notes } from "../api";
+import { useAppSelector } from "../store";
 
 const Board = () => {
-  const [rating] = useRecoilState(ratingState);
-  const [color] = useRecoilState(colorState);
-  const [search] = useRecoilState(searchString);
-  const [page] = useRecoilState(currentPage);
+  const color = useAppSelector((state) => state.filter.colorState);
+  const rating = useAppSelector((state) => state.filter.ratingState);
+  const page = useAppSelector((state) => state.filter.currentPage);
+  const search = useAppSelector((state) => state.filter.searchString);
 
   // HTTP GET
   const { isLoading, data, isError } = useQuery({
