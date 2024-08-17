@@ -1,11 +1,17 @@
 import { describe, it, expect } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { store } from "../store";
 import { Pagination } from "../components";
-import { RecoilRoot } from "recoil";
+
 
 describe("Pagination", () => {
   it("allows user to paginate previous, next, first, and last pages", async () => {
-    render(<Pagination totalPages={10} />, { wrapper: RecoilRoot });
+    render(
+      <Provider store={store}>
+        <Pagination totalPages={10} />
+      </Provider>
+    );
 
     const pageDisplay = screen.getByTestId("page-display");
     expect(pageDisplay).toBeDefined();
@@ -15,7 +21,7 @@ describe("Pagination", () => {
     fireEvent.click(nextButton);
     expect(pageDisplay).toHaveTextContent("2 / 10");
 
-    const lastButton = screen.getByTestId("last-button")
+    const lastButton = screen.getByTestId("last-button");
     fireEvent.click(lastButton);
     expect(pageDisplay).toHaveTextContent("10 / 10");
 

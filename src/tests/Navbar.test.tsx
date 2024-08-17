@@ -1,7 +1,8 @@
 import { describe, it } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RecoilRoot } from "recoil";
+import { Provider } from "react-redux";
+import { store } from "../store";
 import { Navbar } from "../layouts";
 
 const queryClient = new QueryClient();
@@ -10,9 +11,9 @@ describe("Navbar", () => {
   it("renders correctly", async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
+        <Provider store={store}>
           <Navbar />
-        </RecoilRoot>
+        </Provider>
       </QueryClientProvider>
     );
 
