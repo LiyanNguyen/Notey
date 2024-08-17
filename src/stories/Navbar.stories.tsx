@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { NavbarContent } from '../components'
-import { RecoilRoot } from 'recoil'
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 const meta = {
   title: 'Components/Navbar',
   component: NavbarContent,
   decorators: [
     (Story) => (
-      <RecoilRoot>
+      <Provider store={store}>
         <Story />
-      </RecoilRoot>
+      </Provider>
     ),
   ],
   // tags: ['autodocs'],
