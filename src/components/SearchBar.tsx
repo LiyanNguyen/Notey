@@ -1,29 +1,32 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 import { setSearchString, updatePartial } from "../store/filterSlice";
 
 const SearchBar = () => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [value, setValue] = useState<string>("");
+  const search = useAppSelector((state) => state.filter.searchString);
+
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(updatePartial({ searchInput: inputRef.current }));
-  }, [dispatch]);
+    if (search === "") setValue("");
+  }, [search]);
 
   const handleSearch = () => {
     dispatch(updatePartial({ currentPage: 1 }));
-    inputRef.current && dispatch(setSearchString(inputRef.current.value));
+    dispatch(setSearchString(value));
   };
 
   return (
     <div className="flex shadow-md">
       <input
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         data-testid="search-input"
-        ref={inputRef}
         type="search"
         className="rounded-tl rounded-bl bg-violet-50 px-2.5 w-36 dark:bg-slate-800 dark:text-slate-200 focus-within:outline-violet-500"
         placeholder={t("search")}

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,11 @@ const Dropdown = ({
   options: string[];
 }) => {
   const dispatch = useAppDispatch();
-  dispatch(updatePartial({ currentPage: 1 }));
+
+  useEffect(() => {
+    dispatch(updatePartial({ currentPage: 1 }));
+  }, [value, dispatch]);
+  
   const { t } = useTranslation();
 
   return (

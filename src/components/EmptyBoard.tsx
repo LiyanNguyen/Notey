@@ -1,17 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch } from "../store";
 import { resetFilters } from "../store/filterSlice";
 
 const EmptyBoard = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const inputElement = useAppSelector((state) => state.filter.searchInput);
 
   const resetFiltersAndInput = () => {
-    if (inputElement) {
-      inputElement.value = "";
       dispatch(resetFilters());
-    }
   };
 
   return (

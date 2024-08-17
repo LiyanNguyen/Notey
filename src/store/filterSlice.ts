@@ -1,4 +1,3 @@
-// src/store/filterSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface FilterState {
@@ -6,7 +5,6 @@ interface FilterState {
   colorState: string;
   searchString: string;
   currentPage: number;
-  searchInput: HTMLInputElement | null;
 }
 
 const initialState: FilterState = {
@@ -14,7 +12,6 @@ const initialState: FilterState = {
   colorState: "all",
   searchString: "",
   currentPage: 1,
-  searchInput: null,
 };
 
 export const filterSlice = createSlice({
@@ -39,13 +36,7 @@ export const filterSlice = createSlice({
     updatePartial: (state, action: PayloadAction<Partial<FilterState>>) => {
       Object.assign(state, action.payload);
     },
-    resetFilters: (state) => {
-      state.ratingState = initialState.ratingState;
-      state.colorState = initialState.colorState;
-      state.searchString = initialState.searchString;
-      state.currentPage = initialState.currentPage;
-      // Do not modify searchInput
-    },
+    resetFilters: () => initialState,
   },
 });
 
