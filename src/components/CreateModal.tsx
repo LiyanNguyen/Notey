@@ -146,7 +146,7 @@ const CreateModal = (props: Props) => {
                 <div className="h-0.5 bg-gray-200 mt-4" />
                 <button
                   data-testid="create-button"
-                  disabled={title.length < 5 || description.length < 5}
+                  disabled={title.length < 1 || description.length < 1}
                   type="button"
                   className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 self-center w-28 disabled:bg-slate-200 disabled:text-gray-400"
                   onClick={() => POSTMutate()}
